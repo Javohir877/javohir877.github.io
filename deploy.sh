@@ -35,9 +35,15 @@ cp -r client/dist/. "$tmp/"
 )
 rm -rf "$tmp"
 
-# 4) GitHub Pages gh-pages tarmog'idan ko'rsatsin (birinchi marta yoqiladi)
-gh api "repos/$REPO/pages" >/dev/null 2>&1 || \
+# 4) GitHub Pages gh-pages tarmog'idan ko'rsatsin. *.github.io repozitoriyasida Pages
+#    o'zi main'dan yoqilib qoladi (README ko'rinadi), shuning uchun manbani doim tekshiramiz.
+if gh api "repos/$REPO/pages" >/dev/null 2>&1; then
+  if [ "$(gh api "repos/$REPO/pages" --jq .source.branch)" != "gh-pages" ]; then
+    gh api "repos/$REPO/pages" -X PUT -f "source[branch]=gh-pages" -f "source[path]=/"
+  fi
+else
   gh api "repos/$REPO/pages" -X POST -f "source[branch]=gh-pages" -f "source[path]=/" >/dev/null
+fi
 
 echo
 echo "Tayyor: https://javohir877.github.io  (birinchi marta 1–2 daqiqada ochiladi)"
