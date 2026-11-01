@@ -30,7 +30,8 @@ Server `client/dist` ni o'zi tarqatadi, ya'ni bitta Node xizmati yetarli
 
 `gh-pages` tarmog'ida yig'ilgan frontend turadi (backendsiz: loyihalar
 `client/src/data.js` dan olinadi, ko'rishlar hisoblagichi ko'rinmaydi).
-Yangilash: `cd client && npm run build`, keyin `client/dist` ni `gh-pages` ga yuklash.
+Joylash va yangilash (Git Bash'da): `bash deploy.sh` — manba kodni `main` ga,
+yig'ilgan saytni `gh-pages` ga yuklaydi, birinchi marta repozitoriya va Pages'ni ham yaratadi.
 
 ## Yangi ish qo'shish
 
