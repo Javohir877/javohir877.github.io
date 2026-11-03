@@ -12,8 +12,8 @@ const SITES = [
     },
     tags: ["Cloudflare Workers", "D1", "Telegram Mini App", "Android"],
     url: "https://javohir877.github.io/OPUS-MARKET/",
-    img: "/img/opus.jpg",
-    phone: "/img/opus-m.jpg",
+    img: "/img/opus.webp",
+    phone: "/img/opus-m.webp",
     wide: true,
   },
   {
@@ -26,7 +26,7 @@ const SITES = [
     },
     tags: ["React", "Vite", "Cloudflare D1", "PWA"],
     url: "https://javohir877.github.io/OLOV-FOOD/",
-    img: "/img/olov.jpg",
+    img: "/img/olov.webp",
   },
   {
     id: "hojiakbar",
@@ -38,7 +38,7 @@ const SITES = [
     },
     tags: ["React", "Express", "ffmpeg"],
     url: "https://javohir877.github.io/byhojiakbar-portfolio/",
-    img: "/img/hojiakbar.jpg",
+    img: "/img/hojiakbar.webp",
   },
   {
     id: "startap",
@@ -50,8 +50,8 @@ const SITES = [
     },
     tags: ["HTML", "CSS", "JavaScript"],
     url: "https://javohir877.github.io/startap-sayohati/",
-    img: "/img/startap.jpg",
-    phone: "/img/startap-m.jpg",
+    img: "/img/startap.webp",
+    phone: "/img/startap-m.webp",
     wide: true,
   },
 ];
@@ -101,11 +101,11 @@ const BOTS = [
 
 // 3D telefonda navbat bilan ko'rsatiladigan ekranlar
 const SCREENS = [
-  { img: "/img/opus-app.jpg", name: { uz: "OPUS MARKET · Android ilova", ru: "OPUS MARKET · Android-приложение", en: "OPUS MARKET · Android app" } },
-  { img: "/img/olov-m.jpg", name: { uz: "OLOV FOOD · telefonda", ru: "OLOV FOOD · на телефоне", en: "OLOV FOOD · on mobile" } },
-  { img: "/img/hojiakbar-m.jpg", name: { uz: "By.Hojiakbar · telefonda", ru: "By.Hojiakbar · на телефоне", en: "By.Hojiakbar · on mobile" } },
-  { img: "/img/startap-m.jpg", name: { uz: "Startap Sayohati · telefonda", ru: "Startap Sayohati · на телефоне", en: "Startap Sayohati · on mobile" } },
-  { img: "/img/opus-m.jpg", name: { uz: "OPUS MARKET · sayt telefonda", ru: "OPUS MARKET · сайт на телефоне", en: "OPUS MARKET · site on mobile" } },
+  { img: "/img/opus-app.webp", name: { uz: "OPUS MARKET · Android ilova", ru: "OPUS MARKET · Android-приложение", en: "OPUS MARKET · Android app" } },
+  { img: "/img/olov-m.webp", name: { uz: "OLOV FOOD · telefonda", ru: "OLOV FOOD · на телефоне", en: "OLOV FOOD · on mobile" } },
+  { img: "/img/hojiakbar-m.webp", name: { uz: "By.Hojiakbar · telefonda", ru: "By.Hojiakbar · на телефоне", en: "By.Hojiakbar · on mobile" } },
+  { img: "/img/startap-m.webp", name: { uz: "Startap Sayohati · telefonda", ru: "Startap Sayohati · на телефоне", en: "Startap Sayohati · on mobile" } },
+  { img: "/img/opus-m.webp", name: { uz: "OPUS MARKET · sayt telefonda", ru: "OPUS MARKET · сайт на телефоне", en: "OPUS MARKET · site on mobile" } },
 ];
 
 export const FALLBACK = { sites: SITES, bots: BOTS, screens: SCREENS };

@@ -11,17 +11,25 @@ const LANG_COLOR = { JavaScript: "#f1e05a", HTML: "#e34c26", CSS: "#663399", Pyt
 const DAYS = 56;
 
 async function load() {
-  try {
-    const c = JSON.parse(localStorage.getItem("gh-cache-v2") || "null");
-    if (c && Date.now() - c.at < 30 * 60_000) return c.data;
-  } catch {}
+  let cached = null;
+  try { cached = JSON.parse(localStorage.getItem("gh-cache-v2") || "null"); } catch {}
+  if (cached && Date.now() - cached.at < 30 * 60_000) return cached.data;
 
-  const [user, repos, events] = await Promise.all([
-    fetch(`https://api.github.com/users/${USER}`).then((r) => r.json()),
-    fetch(`https://api.github.com/users/${USER}/repos?sort=pushed&per_page=12`).then((r) => r.json()),
-    fetch(`https://api.github.com/users/${USER}/events/public?per_page=100`).then((r) => r.json()),
-  ]);
-  if (!Array.isArray(repos) || !Array.isArray(events)) throw new Error("GitHub javob bermadi");
+  const get = (path) => fetch(`https://api.github.com/${path}`).then((r) => {
+    if (!r.ok) throw new Error("GitHub " + r.status); // 403 — soatlik limit tugagan
+    return r.json();
+  });
+  let user, repos, events;
+  try {
+    [user, repos, events] = await Promise.all([
+      get(`users/${USER}`),
+      get(`users/${USER}/repos?sort=pushed&per_page=12`),
+      get(`users/${USER}/events/public?per_page=100`),
+    ]);
+  } catch (e) {
+    if (cached) return cached.data; // eski bo'lsa ham saqlanganini ko'rsatamiz
+    throw e;
+  }
 
   // kunlar bo'yicha faollik: har push — bitta "ish"
   const counts = {};
