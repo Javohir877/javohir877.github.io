@@ -1,9 +1,9 @@
 // Server ishlamay qolganda ishlatiladigan zaxira nusxa (asl ro'yxat: server/data.js)
 export const FALLBACK = {
   sites: [
-    { id: "opus", name: "OPUS MARKET", text: "Kompyuter do'koni: sayt, server, bot va Android ilova.", url: "https://javohir877.github.io/OPUS-MARKET/", img: "/img/opus.jpg", phone: "/img/opus-m.jpg", wide: true },
-    { id: "olov", name: "OLOV FOOD", text: "Fast food sayti. Burger sichqonchaga qaraydi.", url: "https://javohir877.github.io/OLOV-FOOD/", img: "/img/olov.jpg" },
-    { id: "hojiakbar", name: "By.Hojiakbar", text: "Video montajchi uchun portfolio va o'z pleyeri.", url: "https://javohir877.github.io/byhojiakbar-portfolio/", img: "/img/hojiakbar.jpg" },
+    { id: "opus", tags: ["Cloudflare Workers", "D1", "Telegram Mini App", "Android"], name: "OPUS MARKET", text: "Kompyuter do'koni: sayt, server, bot va Android ilova.", url: "https://javohir877.github.io/OPUS-MARKET/", img: "/img/opus.jpg", phone: "/img/opus-m.jpg", wide: true },
+    { id: "olov", tags: ["React", "Vite", "Cloudflare D1", "PWA"], name: "OLOV FOOD", text: "Fast food sayti. Burger sichqonchaga qaraydi.", url: "https://javohir877.github.io/OLOV-FOOD/", img: "/img/olov.jpg" },
+    { id: "hojiakbar", tags: ["React", "Express", "ffmpeg"], name: "By.Hojiakbar", text: "Video montajchi uchun portfolio va o'z pleyeri.", url: "https://javohir877.github.io/byhojiakbar-portfolio/", img: "/img/hojiakbar.jpg" },
   ],
   bots: [
     { user: "opussmarketbot", name: "OPUS MARKET", img: "/img/bot-opussmarketbot.jpg", text: "Buyurtmani 6 xonali kod bilan tasdiqlaydi. Menyu tugmasi do'konni Telegram ichida ochadi." },

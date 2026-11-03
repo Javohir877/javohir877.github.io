@@ -1,11 +1,39 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 
 const finePointer = typeof matchMedia !== "undefined" && matchMedia("(hover: hover) and (pointer: fine)").matches;
+const reduced = typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Sichqonchaga qarab 3D egiladigan quti
+// 3D egiladigan quti: sichqonchada kursorga qarab, sensorli ekranda esa
+// scroll paytida — pastdan qiya kirib keladi, ekran o'rtasida tekislanadi.
 export function Tilt({ className = "", max = 9, as: Tag = "div", children, ...rest }) {
   const ref = useRef(null);
+
+  useEffect(() => {
+    if (finePointer || reduced) return;
+    const el = ref.current;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; // -1..1
+      const rx = Math.max(-1, Math.min(1, p)) * max * 2;
+      el.style.setProperty("--rx", rx.toFixed(2) + "deg");
+      el.style.setProperty("--ry", (-p * max * 0.6).toFixed(2) + "deg");
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    el.classList.add("hot");
+    update();
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      removeEventListener("scroll", onScroll);
+      removeEventListener("resize", onScroll);
+    };
+  }, [max]);
+
   const move = (e) => {
     if (!finePointer) return;
     const el = ref.current;
@@ -17,6 +45,7 @@ export function Tilt({ className = "", max = 9, as: Tag = "div", children, ...re
     el.style.setProperty("--rx", (-py * max * 1.4).toFixed(2) + "deg");
   };
   const leave = () => {
+    if (!finePointer) return;
     const el = ref.current;
     el.classList.remove("hot");
     el.style.removeProperty("--ry");
@@ -41,6 +70,9 @@ function WorkCard({ site, i }) {
         <div className="c-text">
           <h3>{site.name}</h3>
           <p>{site.text}</p>
+          {site.tags?.length > 0 && (
+            <ul className="c-tags">{site.tags.map((t) => <li key={t}>{t}</li>)}</ul>
+          )}
           <span className="c-go">Saytni ko'rish ↗</span>
         </div>
       </Tilt>

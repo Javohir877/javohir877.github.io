@@ -4,6 +4,7 @@
 export const SITES = [
   {
     id: "opus",
+    tags: ["Cloudflare Workers", "D1", "Telegram Mini App", "Android"],
     name: "OPUS MARKET",
     text: "Kompyuter do'koni: sayt, server, bot va Android ilova.",
     url: "https://javohir877.github.io/OPUS-MARKET/",
@@ -13,6 +14,7 @@ export const SITES = [
   },
   {
     id: "olov",
+    tags: ["React", "Vite", "Cloudflare D1", "PWA"],
     name: "OLOV FOOD",
     text: "Fast food sayti. Burger sichqonchaga qaraydi.",
     url: "https://javohir877.github.io/OLOV-FOOD/",
@@ -20,6 +22,7 @@ export const SITES = [
   },
   {
     id: "hojiakbar",
+    tags: ["React", "Express", "ffmpeg"],
     name: "By.Hojiakbar",
     text: "Video montajchi uchun portfolio va o'z pleyeri.",
     url: "https://javohir877.github.io/byhojiakbar-portfolio/",
