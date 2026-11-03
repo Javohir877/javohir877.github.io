@@ -51,8 +51,6 @@ const DEPLOY = [
   "@@✓ ishlayapti",
 ];
 
-export const PHASE_NAMES = ["yozish", "tahrir", "sayqal", "ishga tushirish"];
-
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
 function paint(line) {

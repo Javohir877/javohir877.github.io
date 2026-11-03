@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { useReveal } from "../hooks/useReveal.js";
+import { useLang } from "../i18n.jsx";
 
 const finePointer = typeof matchMedia !== "undefined" && matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 export default function Contact() {
+  const { t } = useLang();
   const magnet = useRef(null);
   const head = useReveal();
   const cta = useReveal();
@@ -21,11 +23,11 @@ export default function Contact() {
   return (
     <section className="sec contact" id="aloqa" onPointerMove={pull} onPointerLeave={() => (magnet.current.style.transform = "")}>
       <div className="rv" ref={head}>
-        <h2>Loyihangiz <em>bormi?</em></h2>
-        <p className="sec-sub">Do'kon, kafe yoki xizmatingiz uchun sayt, bot yoki ilova.</p>
+        <h2>{t.contact.title[0]}<em>{t.contact.title[1]}</em></h2>
+        <p className="sec-sub">{t.contact.sub}</p>
       </div>
       <div className="contact-cta rv" ref={cta}>
-        <a ref={magnet} className="btn big magnet" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">Telegramda yozish</a>
+        <a ref={magnet} className="btn big magnet" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">{t.contact.btn}</a>
         <a className="link" href="https://github.com/Javohir877" target="_blank" rel="noopener">GitHub ›</a>
       </div>
     </section>

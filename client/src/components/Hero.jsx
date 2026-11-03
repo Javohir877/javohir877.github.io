@@ -1,38 +1,56 @@
 import { lazy, Suspense, useState } from "react";
+import { useLang } from "../i18n.jsx";
 
 // three.js og'ir, shuning uchun 3D sahna alohida yuklanadi
 const PhoneScene = lazy(() => import("./PhoneScene.jsx"));
 
-const VERBS = ["yozaman", "tahrirlayman", "sayqallayman", "ishga tushiraman"];
-
 export default function Hero({ phase, screens, bots }) {
-  const [screenName, setScreenName] = useState(screens[0]?.name);
+  const { t, pick } = useLang();
+  const [screen, setScreen] = useState(0);
+  const [goTo, setGoTo] = useState(null);
   const cls = (i) => (i === phase ? "on" : i < phase ? "done" : "");
 
   return (
     <section className="hero">
       <div className="hero-text">
-        <p className="eyebrow">Sayt · Telegram bot · Android ilova</p>
+        <p className="eyebrow">{t.hero.eyebrow}</p>
         <h1>
-          Men Javohirman. Sun'iy intellekt bilan birgalikda kod{" "}
-          <em className={cls(0)}>{VERBS[0]}</em>, uni <em className={cls(1)}>{VERBS[1]}</em>,{" "}
-          <em className={cls(2)}>{VERBS[2]}</em> va <em className={cls(3)}>{VERBS[3]}</em>.
+          {t.hero.parts.map((p, i) =>
+            typeof p === "number" ? <em key={i} className={cls(p)}>{t.hero.verbs[p]}</em> : <span key={i}>{p}</span>
+          )}
         </h1>
         <p className="hero-links">
-          <a className="btn" href="#ishlar">Ishlarni ko'rish</a>
-          <a className="link" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">Telegramda yozish ›</a>
+          <a className="btn" href="#ishlar">{t.hero.cta}</a>
+          <a className="link" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">{t.hero.tg}</a>
         </p>
       </div>
 
       <div className="stage">
         <Suspense fallback={null}>
-          <PhoneScene screens={screens} bots={bots} onScreen={setScreenName} />
+          <PhoneScene screens={screens} bots={bots} goTo={goTo} onScreen={setScreen} />
         </Suspense>
         <div className="stage-ui">
-          <p className="screen-name">{screenName}</p>
-          <p className="hint">sudrang — aylanadi · bosing — ekran almashadi · botni bosing — ochiladi</p>
+          <p className="screen-name">{pick(screens[screen]?.name)}</p>
+          <div className="dots" role="tablist" aria-label={t.hero.screens}>
+            {screens.map((s, i) => (
+              <button
+                key={i}
+                role="tab"
+                aria-selected={i === screen}
+                aria-label={pick(s.name)}
+                className={i === screen ? "on" : ""}
+                onClick={() => setGoTo({ i, at: Date.now() })}
+              />
+            ))}
+          </div>
+          <p className="hint">{t.hero.hint}</p>
         </div>
       </div>
+
+      <a className="scroll-cue" href="#ishlar" aria-label={t.hero.scroll}>
+        <span className="mouse"><i /></span>
+        <span>{t.hero.scroll}</span>
+      </a>
     </section>
   );
 }

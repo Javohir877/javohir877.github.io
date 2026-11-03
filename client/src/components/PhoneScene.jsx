@@ -138,11 +138,11 @@ function buildPhone(firstScreen) {
   return { phone, screenMat };
 }
 
-export default function PhoneScene({ screens, bots, onScreen }) {
+export default function PhoneScene({ screens, bots, goTo, onScreen }) {
   const wrap = useRef(null);
   const canvasRef = useRef(null);
-  const props = useRef({ screens, bots, onScreen });
-  props.current = { screens, bots, onScreen };
+  const props = useRef({ screens, bots, goTo, onScreen });
+  props.current = { screens, bots, goTo, onScreen };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -207,7 +207,7 @@ export default function PhoneScene({ screens, bots, onScreen }) {
     /* boshqaruv */
     const mouse = { x: 0, y: 0 };
     let spin = 0, spinVel = 0, dragging = false, dragX = 0, moved = 0;
-    let flip = 0, flipTarget = 0, idx = 0, swapped = true, scrollT = 0;
+    let flip = 0, flipTarget = 0, idx = 0, swapped = true, scrollT = 0, lastGoTo = null;
 
     const onMove = (e) => {
       mouse.x = (e.clientX / innerWidth) * 2 - 1;
@@ -282,9 +282,19 @@ export default function PhoneScene({ screens, bots, onScreen }) {
 
       if (!dragging) { spinVel *= 0.94; spin += spinVel; spin *= 0.985; }
       flip += (flipTarget - flip) * 0.08;
+      // pastdagi tugmalardan biri bosilsa — o'sha ekranga aylanadi
+      const want = props.current.goTo;
+      if (want && want !== lastGoTo) {
+        lastGoTo = want;
+        if (want.i !== idx) {
+          flipTarget += Math.PI * 2;
+          swapped = false;
+          idx = want.i;
+        }
+      }
       if (!swapped && Math.abs(flipTarget - flip) < Math.PI) {
         screenMat.map = screenTex[idx];
-        props.current.onScreen?.(screens[idx].name);
+        props.current.onScreen?.(idx);
         swapped = true;
       }
 
@@ -297,7 +307,8 @@ export default function PhoneScene({ screens, bots, onScreen }) {
 
       coins.forEach((c, i) => {
         const a = c.userData.phase + t * 0.45 * k;
-        c.position.set(Math.cos(a) * 1.0, Math.sin(a * 2 + i) * 0.4 + 0.05, Math.sin(a) * 0.7);
+        // tangalar faqat telefon orqasida va yonlarida aylanadi — ekranni hech qachon yopmaydi
+        c.position.set(Math.cos(a) * 1.02, Math.sin(a * 2 + i) * 0.4 + 0.05, -Math.abs(Math.sin(a)) * 0.7);
         c.lookAt(camera.position);
         c.rotateY(Math.sin(t * 1.3 + i) * 0.45 * k);
       });

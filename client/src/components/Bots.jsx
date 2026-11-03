@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
+import { useLang } from "../i18n.jsx";
 
 function FlipCard({ bot, i }) {
+  const { t, pick } = useLang();
   const [open, setOpen] = useState(false);
   const reveal = useReveal();
   return (
@@ -20,8 +22,8 @@ function FlipCard({ bot, i }) {
           <span>@{bot.user}</span>
         </div>
         <div className="face back">
-          <p>{bot.text}</p>
-          <a className="btn sm" href={`https://t.me/${bot.user}`} target="_blank" rel="noopener">Ochish ↗</a>
+          <p>{pick(bot.text)}</p>
+          <a className="btn sm" href={`https://t.me/${bot.user}`} target="_blank" rel="noopener">{t.bots.open}</a>
         </div>
       </div>
     </div>
@@ -29,12 +31,13 @@ function FlipCard({ bot, i }) {
 }
 
 export default function Bots({ bots }) {
+  const { t } = useLang();
   const head = useReveal();
   return (
     <section className="sec" id="botlar">
       <div className="rv" ref={head}>
-        <h2 className="sec-title">Telegram botlar</h2>
-        <p className="sec-sub">Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.</p>
+        <h2 className="sec-title">{t.bots.title}</h2>
+        <p className="sec-sub">{t.bots.sub}</p>
       </div>
       <div className="bots">
         {bots.map((b, i) => <FlipCard key={b.user} bot={b} i={i} />)}

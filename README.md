@@ -2,7 +2,8 @@
 
 Sayt: https://javohir877.github.io
 
-- `client/` — frontend: React + Vite, 3D telefon three.js'da
+- `client/` — frontend: React + Vite, 3D telefon three.js'da, uch tilda (uz / ru / en — `client/src/i18n.jsx`),
+  GitHub faolligi bo'limi GitHub API'dan jonli olinadi
 - `server/` — backend: Node.js + Express
   - `GET /api/projects` — saytlar, botlar va 3D telefon ekranlari (`server/data.js`)
   - `POST /api/visit` — sayt necha marta ochilganini sanaydi (`server/data/views.json`)
@@ -35,6 +36,7 @@ yig'ilgan saytni `gh-pages` ga yuklaydi, birinchi marta repozitoriya va Pages'ni
 
 ## Yangi ish qo'shish
 
-`server/data.js` dagi `SITES`, `BOTS` yoki `SCREENS` ro'yxatiga yozing,
-rasmni `client/public/img/` ga qo'ying. Server ishlamay qolsa, sayt
-`client/src/data.js` dagi zaxira nusxadan foydalanadi — uni ham yangilab qo'ying.
+`server/data.js` dagi `SITES`, `BOTS` yoki `SCREENS` ro'yxatiga yozing (matnlar
+`{ uz, ru, en }` ko'rinishida), rasmni `client/public/img/` ga qo'ying, keyin
+`node scripts/sync-data.mjs` — u `client/src/data.js` zaxira nusxasini yangilaydi
+(GitHub Pages'da sayt shu nusxadan foydalanadi).

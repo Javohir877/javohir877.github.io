@@ -7,7 +7,8 @@ import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import Works from "./components/Works.jsx";
 import Bots from "./components/Bots.jsx";
-import AiCode from "./components/AiCode.jsx";
+import Process from "./components/Process.jsx";
+import GitHub from "./components/GitHub.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 
@@ -35,7 +36,8 @@ export default function App() {
       <main>
         <Works sites={data.sites} />
         <Bots bots={data.bots} />
-        <AiCode phase={editor.phase} html={editor.html} />
+        <Process phase={editor.phase} html={editor.html} />
+        <GitHub />
         <Contact />
       </main>
       <Footer views={views} />
