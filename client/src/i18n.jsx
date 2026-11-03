@@ -18,7 +18,7 @@ const DICT = {
       scroll: "pastga",
       screens: "Ekranlar",
     },
-    works: { title: "Ishlar", site: "Saytni ko'rish ↗", code: "GitHub'da ko'rish ↗" },
+    works: { title: "Ishlar", site: "Saytni ko'rish ↗" },
     bots: { title: "Telegram botlar", sub: "Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.", open: "Ochish ↗" },
     process: {
       title: "Sun'iy intellekt bilan ishlayman",
@@ -57,7 +57,7 @@ const DICT = {
       scroll: "вниз",
       screens: "Экраны",
     },
-    works: { title: "Работы", site: "Открыть сайт ↗", code: "Открыть на GitHub ↗" },
+    works: { title: "Работы", site: "Открыть сайт ↗" },
     bots: { title: "Telegram-боты", sub: "Нажмите на карточку или наведите курсор — откроется обратная сторона.", open: "Открыть ↗" },
     process: {
       title: "Работаю с искусственным интеллектом",
@@ -96,7 +96,7 @@ const DICT = {
       scroll: "scroll",
       screens: "Screens",
     },
-    works: { title: "Work", site: "Open the site ↗", code: "View on GitHub ↗" },
+    works: { title: "Work", site: "Open the site ↗" },
     bots: { title: "Telegram bots", sub: "Tap a card or hover over it to flip it.", open: "Open ↗" },
     process: {
       title: "I work with AI",

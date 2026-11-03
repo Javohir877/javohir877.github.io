@@ -5,13 +5,14 @@ import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
 
 const USER = "Javohir877";
-const SKIP = new Set(["javohir877.github.io"]);
+// portfolioning o'zi va ishlamaydigan loyihalar ko'rsatilmaydi
+const SKIP = new Set(["javohir877.github.io", "mexrify"]);
 const LANG_COLOR = { JavaScript: "#f1e05a", HTML: "#e34c26", CSS: "#663399", Python: "#3572a5", TypeScript: "#3178c6" };
 const DAYS = 56;
 
 async function load() {
   try {
-    const c = JSON.parse(localStorage.getItem("gh-cache") || "null");
+    const c = JSON.parse(localStorage.getItem("gh-cache-v2") || "null");
     if (c && Date.now() - c.at < 30 * 60_000) return c.data;
   } catch {}
 
@@ -37,7 +38,7 @@ async function load() {
       .slice(0, 4)
       .map((r) => ({ name: r.name, desc: r.description, lang: r.language, url: r.html_url, pushed: r.pushed_at })),
   };
-  try { localStorage.setItem("gh-cache", JSON.stringify({ at: Date.now(), data })); } catch {}
+  try { localStorage.setItem("gh-cache-v2", JSON.stringify({ at: Date.now(), data })); } catch {}
   return data;
 }
 

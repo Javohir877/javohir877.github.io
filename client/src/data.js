@@ -41,19 +41,6 @@ const SITES = [
     img: "/img/hojiakbar.jpg",
   },
   {
-    id: "mexrify",
-    name: "MEXRIFY",
-    text: {
-      uz: "Musiqa platformasi: dunyo chartlari, phonk, pleylistlar va to'liq ijro.",
-      ru: "Музыкальная платформа: мировые чарты, фонк, плейлисты и полное воспроизведение.",
-      en: "Music platform: world charts, phonk, playlists and full playback.",
-    },
-    tags: ["React", "Node.js", "Express", "Deezer API"],
-    url: "https://github.com/Javohir877/mexrify",
-    art: "vinyl",
-    code: true,
-  },
-  {
     id: "startap",
     name: "Startap Sayohati",
     text: {
@@ -64,6 +51,8 @@ const SITES = [
     tags: ["HTML", "CSS", "JavaScript"],
     url: "https://javohir877.github.io/startap-sayohati/",
     img: "/img/startap.jpg",
+    phone: "/img/startap-m.jpg",
+    wide: true,
   },
 ];
 

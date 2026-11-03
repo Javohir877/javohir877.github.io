@@ -59,29 +59,13 @@ export function Tilt({ className = "", max = 9, as: Tag = "div", children, ...re
   );
 }
 
-// MEXRIFY uchun skrinshot o'rniga: aylanib turadigan vinil plastinka
-function Vinyl({ name }) {
-  return (
-    <div className="c-art" aria-hidden="true">
-      <div className="vinyl">
-        <span className="v-label">{name}</span>
-      </div>
-      <div className="eq">{Array.from({ length: 18 }, (_, k) => <i key={k} style={{ animationDelay: (k % 6) * -0.17 + "s" }} />)}</div>
-    </div>
-  );
-}
-
 function WorkCard({ site, i }) {
   const { t, pick } = useLang();
   const reveal = useReveal();
   return (
     <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ transitionDelay: (i % 2) * 0.08 + "s" }}>
       <Tilt as="a" className={"card c-" + site.id} href={site.url} target="_blank" rel="noopener">
-        {site.art === "vinyl" ? (
-          <Vinyl name={site.name} />
-        ) : (
-          <img className="c-img" src={site.img} alt={site.name} width="1440" height="900" loading="lazy" />
-        )}
+        <img className="c-img" src={site.img} alt={site.name} width="1440" height="900" loading="lazy" />
         {site.phone && (
           <div className="c-phone"><img src={site.phone} alt="" width="780" height="1688" loading="lazy" /></div>
         )}
@@ -91,7 +75,7 @@ function WorkCard({ site, i }) {
           {site.tags?.length > 0 && (
             <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>
           )}
-          <span className="c-go">{site.code ? t.works.code : t.works.site}</span>
+          <span className="c-go">{t.works.site}</span>
         </div>
       </Tilt>
     </div>
