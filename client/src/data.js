@@ -56,9 +56,12 @@ const SITES = [
   },
 ];
 
+// Botlar: Telegram va Discord. url bo'lmasa, kartada tugma chiqmaydi.
 const BOTS = [
   {
     user: "opussmarketbot",
+    platform: "telegram",
+    url: "https://t.me/opussmarketbot",
     name: "OPUS MARKET",
     img: "/img/bot-opussmarketbot.jpg",
     text: {
@@ -69,6 +72,8 @@ const BOTS = [
   },
   {
     user: "olovfoodbot",
+    platform: "telegram",
+    url: "https://t.me/olovfoodbot",
     name: "OLOV FOOD",
     img: "/img/bot-olovfoodbot.jpg",
     text: {
@@ -79,6 +84,8 @@ const BOTS = [
   },
   {
     user: "swipeslidebot",
+    platform: "telegram",
+    url: "https://t.me/swipeslidebot",
     name: "SwipeSlide",
     img: "/img/bot-swipeslidebot.jpg",
     text: {
@@ -89,12 +96,26 @@ const BOTS = [
   },
   {
     user: "dzteambot",
+    platform: "telegram",
+    url: "https://t.me/dzteambot",
     name: "DZ TEAM",
     img: "/img/bot-dzteambot.jpg",
     text: {
       uz: "DELTA ZONE jamoasining rasmiy boti: jamoaga qo'shilish uchun ariza.",
       ru: "Официальный бот команды DELTA ZONE: заявки на вступление.",
       en: "Official DELTA ZONE team bot: applications to join.",
+    },
+  },
+  {
+    user: "dzmafia",
+    platform: "discord",
+    url: null, // TODO: botni serverga qo'shish havolasi (OAuth2 invite) kelganda yoziladi
+    name: "DZ MAFIA",
+    img: "/img/bot-dzmafia.svg",
+    text: {
+      uz: "Discord'da Mafia o'yini: Don, Komissar, Doktor, Ma'shuqa, Qotil — tun va kun bosqichlari, /mafia buyruqlari.",
+      ru: "Игра «Мафия» в Discord: Дон, Комиссар, Доктор, Любовница, Маньяк — ночь и день, команды /mafia.",
+      en: "Mafia game on Discord: Don, Detective, Doctor, Lover, Killer — night and day phases, /mafia commands.",
     },
   },
 ];

@@ -188,7 +188,9 @@ export default function PhoneScene({ screens, bots, goTo, onScreen }) {
     // bot tangalari
     const CR = 0.18, CT = 0.03;
     const rimMat = new THREE.MeshPhysicalMaterial({ color: 0xd9dbe0, metalness: 1, roughness: 0.25 });
-    const coins = bots.map((b, i) => {
+    // tangalar faqat havolasi bor botlardan — bosilganda ochiladi
+    const linked = bots.filter((b) => b.url);
+    const coins = linked.map((b, i) => {
       const coin = new THREE.Group();
       const edge = new THREE.Mesh(new THREE.CylinderGeometry(CR, CR, CT, 64), rimMat);
       edge.rotation.x = Math.PI / 2;
@@ -198,7 +200,7 @@ export default function PhoneScene({ screens, bots, goTo, onScreen }) {
       backFace.rotation.y = Math.PI;
       backFace.position.z = -face.position.z;
       coin.add(edge, face, backFace);
-      coin.userData = { url: `https://t.me/${b.user}`, phase: (i / bots.length) * Math.PI * 2 };
+      coin.userData = { url: b.url, phase: (i / linked.length) * Math.PI * 2 };
       coin.children.forEach((m) => (m.userData = coin.userData));
       scene.add(coin);
       return coin;

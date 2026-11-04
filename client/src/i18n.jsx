@@ -19,7 +19,7 @@ const DICT = {
       screens: "Ekranlar",
     },
     works: { title: "Ishlar", site: "Saytni ko'rish ↗" },
-    bots: { title: "Telegram botlar", sub: "Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.", open: "Ochish ↗" },
+    bots: { title: "Botlar", sub: "Telegram va Discord uchun. Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
     process: {
       title: "Sun'iy intellekt bilan ishlayman",
       sub: "Har loyiha shu to'rt bosqichdan o'tadi. O'ngdagi kod oynasi hozir qaysi bosqichda ekanini ko'rsatib turadi.",
@@ -58,7 +58,7 @@ const DICT = {
       screens: "Экраны",
     },
     works: { title: "Работы", site: "Открыть сайт ↗" },
-    bots: { title: "Telegram-боты", sub: "Нажмите на карточку или наведите курсор — откроется обратная сторона.", open: "Открыть ↗" },
+    bots: { title: "Боты", sub: "Для Telegram и Discord. Нажмите на карточку или наведите курсор — откроется обратная сторона.", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
     process: {
       title: "Работаю с искусственным интеллектом",
       sub: "Каждый проект проходит эти четыре этапа. Окно с кодом справа показывает, на каком этапе он сейчас.",
@@ -97,7 +97,7 @@ const DICT = {
       screens: "Screens",
     },
     works: { title: "Work", site: "Open the site ↗" },
-    bots: { title: "Telegram bots", sub: "Tap a card or hover over it to flip it.", open: "Open ↗" },
+    bots: { title: "Bots", sub: "For Telegram and Discord. Tap a card or hover over it to flip it.", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
     process: {
       title: "I work with AI",
       sub: "Every project goes through these four steps. The code window on the right shows which one it is in right now.",

@@ -17,13 +17,18 @@ function FlipCard({ bot, i }) {
     >
       <div className="flip-in">
         <div className="face front">
+          <span className={"platform " + bot.platform}>{bot.platform === "discord" ? "Discord" : "Telegram"}</span>
           <img src={bot.img} alt="" width="120" height="120" />
           <b>{bot.name}</b>
-          <span>@{bot.user}</span>
+          <span>{bot.platform === "discord" ? t.bots.discord : "@" + bot.user}</span>
         </div>
         <div className="face back">
           <p>{pick(bot.text)}</p>
-          <a className="btn sm" href={`https://t.me/${bot.user}`} target="_blank" rel="noopener">{t.bots.open}</a>
+          {bot.url && (
+            <a className="btn sm" href={bot.url} target="_blank" rel="noopener">
+              {bot.platform === "discord" ? t.bots.invite : t.bots.open}
+            </a>
+          )}
         </div>
       </div>
     </div>

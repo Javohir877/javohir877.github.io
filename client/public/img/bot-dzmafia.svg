@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <rect width="320" height="320" fill="#1e1f24"/>
+  <!-- niqob -->
+  <path d="M60 118c34-22 66-24 100-10 34-14 66-12 100 10-4 62-36 102-100 104C96 220 64 180 60 118z" fill="#eeeae2"/>
+  <path d="M96 138c14-10 30-10 42 2-10 14-30 16-42-2zM182 140c12-12 28-12 42-2-12 18-32 16-42 2z" fill="#1e1f24"/>
+  <path d="M128 182c20 12 44 12 64 0" stroke="#1e1f24" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <text x="160" y="276" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#e5484d" letter-spacing="4">DZ MAFIA</text>
+</svg>
