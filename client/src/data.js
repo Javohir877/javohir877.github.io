@@ -109,13 +109,25 @@ const BOTS = [
   {
     user: "dzmafia",
     platform: "discord",
-    url: null, // TODO: botni serverga qo'shish havolasi (OAuth2 invite) kelganda yoziladi
+    url: "https://discord.com/oauth2/authorize?client_id=1567548963098206410",
     name: "DZ MAFIA",
-    img: "/img/bot-dzmafia.svg",
+    img: "/img/bot-dzmafia.png",
     text: {
       uz: "Discord'da Mafia o'yini: Don, Komissar, Doktor, Ma'shuqa, Qotil — tun va kun bosqichlari, /mafia buyruqlari.",
       ru: "Игра «Мафия» в Discord: Дон, Комиссар, Доктор, Любовница, Маньяк — ночь и день, команды /mafia.",
       en: "Mafia game on Discord: Don, Detective, Doctor, Lover, Killer — night and day phases, /mafia commands.",
+    },
+  },
+  {
+    user: "dzmusic",
+    platform: "discord",
+    url: "https://discord.com/oauth2/authorize?client_id=1563234813610168480",
+    name: "DZ MUSIC",
+    img: "/img/bot-dzmusic.png",
+    text: {
+      uz: "DELTA ZONE jamoasining musiqa boti: ovozli kanalga qo'shing va birga tinglang.",
+      ru: "Музыкальный бот команды DELTA ZONE: добавьте в голосовой канал и слушайте вместе.",
+      en: "DELTA ZONE's music bot: add it to a voice channel and listen together.",
     },
   },
 ];
