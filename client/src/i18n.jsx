@@ -18,11 +18,11 @@ const DICT = {
       scroll: "pastga",
       screens: "Ekranlar",
     },
-    works: { title: "Ishlar", site: "Saytni ko'rish ↗" },
+    works: { title: "Ishlar", site: "Saytni ko'rish ↗", details: "Batafsil →", open: "Saytni ochish ↗", code: "Kodni ko'rish ↗", close: "Yopish", prev: "Oldingi", next: "Keyingi", desktop: "Kompyuterda", mobile: "Telefonda" },
     bots: { title: "Botlar", sub: "Telegram va Discord uchun. Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
     process: {
       title: "Sun'iy intellekt bilan ishlayman",
-      sub: "Har loyiha shu to'rt bosqichdan o'tadi. O'ngdagi kod oynasi hozir qaysi bosqichda ekanini ko'rsatib turadi.",
+      sub: "Har loyiha shu to'rt bosqichdan o'tadi. Kod oynasi hozir qaysi bosqichda ekanini ko'rsatib turadi.",
       steps: [
         ["Yozaman", "G'oyani birga muhokama qilamiz, sun'iy intellekt bilan birinchi ishlaydigan versiyani tez yozaman."],
         ["Tahrirlayman", "Har qatorini o'qib chiqaman: xatolar, xavfsizlik, ortiqcha kod — hammasini to'g'irlayman."],
@@ -42,6 +42,9 @@ const DICT = {
       sub: "Do'kon, kafe yoki xizmatingiz uchun sayt, bot yoki ilova.",
       btn: "Telegramda yozish",
     },
+    palette: { hint: "Qidirish", placeholder: "Bo'lim, loyiha yoki bot nomini yozing…", empty: "Hech narsa topilmadi", go: "O'tish", open: "Ochish", lang: "Til", section: "Bo'lim", project: "Loyiha", bot: "Bot", link: "Havola" },
+    pwa: { install: "Telefonga o'rnatish" },
+    top: "Tepaga",
     foot: { views: (n) => `Sayt ${n} marta ochilgan` },
   },
 
@@ -57,11 +60,11 @@ const DICT = {
       scroll: "вниз",
       screens: "Экраны",
     },
-    works: { title: "Работы", site: "Открыть сайт ↗" },
+    works: { title: "Работы", site: "Открыть сайт ↗", details: "Подробнее →", open: "Открыть сайт ↗", code: "Смотреть код ↗", close: "Закрыть", prev: "Назад", next: "Далее", desktop: "На компьютере", mobile: "На телефоне" },
     bots: { title: "Боты", sub: "Для Telegram и Discord. Нажмите на карточку или наведите курсор — откроется обратная сторона.", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
     process: {
       title: "Работаю с искусственным интеллектом",
-      sub: "Каждый проект проходит эти четыре этапа. Окно с кодом справа показывает, на каком этапе он сейчас.",
+      sub: "Каждый проект проходит эти четыре этапа. Окно с кодом показывает, на каком этапе он сейчас.",
       steps: [
         ["Пишу", "Обсуждаем идею, и вместе с ИИ я быстро пишу первую рабочую версию."],
         ["Правлю", "Читаю каждую строку: ошибки, безопасность, лишний код — всё исправляю."],
@@ -81,6 +84,9 @@ const DICT = {
       sub: "Сайт, бот или приложение для вашего магазина, кафе или сервиса.",
       btn: "Написать в Telegram",
     },
+    palette: { hint: "Поиск", placeholder: "Введите раздел, проект или бота…", empty: "Ничего не найдено", go: "Перейти", open: "Открыть", lang: "Язык", section: "Раздел", project: "Проект", bot: "Бот", link: "Ссылка" },
+    pwa: { install: "Установить на телефон" },
+    top: "Наверх",
     foot: { views: (n) => `Сайт открыли ${n} раз` },
   },
 
@@ -96,11 +102,11 @@ const DICT = {
       scroll: "scroll",
       screens: "Screens",
     },
-    works: { title: "Work", site: "Open the site ↗" },
+    works: { title: "Work", site: "Open the site ↗", details: "Details →", open: "Open the site ↗", code: "View code ↗", close: "Close", prev: "Previous", next: "Next", desktop: "Desktop", mobile: "Mobile" },
     bots: { title: "Bots", sub: "For Telegram and Discord. Tap a card or hover over it to flip it.", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
     process: {
       title: "I work with AI",
-      sub: "Every project goes through these four steps. The code window on the right shows which one it is in right now.",
+      sub: "Every project goes through these four steps. The code window shows which one it is in right now.",
       steps: [
         ["Write", "We talk the idea through, then I write the first working version quickly with AI."],
         ["Edit", "I read every line: bugs, security, dead code — all of it gets fixed."],
@@ -120,6 +126,9 @@ const DICT = {
       sub: "A website, bot or app for your shop, café or service.",
       btn: "Message on Telegram",
     },
+    palette: { hint: "Search", placeholder: "Type a section, project or bot…", empty: "Nothing found", go: "Go", open: "Open", lang: "Language", section: "Section", project: "Project", bot: "Bot", link: "Link" },
+    pwa: { install: "Install app" },
+    top: "Back to top",
     foot: { views: (n) => `Opened ${n} times` },
   },
 };

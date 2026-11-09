@@ -4,6 +4,12 @@
 const SITES = [
   {
     id: "opus",
+    repo: "https://github.com/Javohir877/OPUS-MARKET",
+    about: {
+      uz: "Noutbuk va aksessuarlar do'koni. Katalog, akkauntlar, buyurtmalar va rasmlar Cloudflare D1 bazasida — admin panelda narxni o'zgartirsangiz sayt shu zahoti yangilanadi. Buyurtma Telegram bot yuborgan 6 xonali kod bilan tasdiqlanadi, bot ichidagi Mini App esa parolsiz kiritadi. Android ilova — alohida mobil interfeys: stories, filtrlar, kompyuter yig'ish (soket, xotira va blok quvvatini tekshiradi) va buyurtma holatini ko'rsatadigan vidjet.",
+      ru: "Магазин ноутбуков и аксессуаров. Каталог, аккаунты, заказы и фото хранятся в Cloudflare D1 — меняете цену в админке, и сайт обновляется сразу. Заказ подтверждается 6-значным кодом от Telegram-бота, а Mini App внутри бота входит без пароля. Android-приложение — отдельный мобильный интерфейс: сторис, фильтры, сборка ПК (проверяет сокет, память и мощность блока) и виджет со статусом заказа.",
+      en: "Laptop and accessories store. Catalog, accounts, orders and photos live in Cloudflare D1 — change a price in the admin panel and the site updates instantly. Orders are confirmed with a 6-digit code from the Telegram bot, and the Mini App inside the bot signs you in without a password. The Android app is its own mobile UI: stories, filters, a PC builder (checks socket, memory and PSU) and an order-status widget.",
+    },
     name: "OPUS MARKET",
     text: {
       uz: "Kompyuter do'koni: sayt, server, bot va Android ilova.",
@@ -18,6 +24,12 @@ const SITES = [
   },
   {
     id: "olov",
+    repo: "https://github.com/Javohir877/OLOV-FOOD",
+    about: {
+      uz: "Burger va lavash yetkazib berish sayti. Bosh sahifadagi burger tirik: sichqonchaga qaraydi, ko'z qisadi, bossangiz sakraydi. Kombo yig'ish, promokodlar, omad g'ildiragi va 5% keshbek bor. Har buyurtma @olovfoodbot orqali egasiga keladi, admin holatni o'zgartirsa bot mijozga o'zi yozadi. Telefonga ilova sifatida o'rnatiladi.",
+      ru: "Сайт доставки бургеров и лаваша. Бургер на главной живой: следит за курсором, подмигивает, подпрыгивает при нажатии. Есть сборка комбо, промокоды, колесо удачи и кешбэк 5%. Каждый заказ приходит владельцу через @olovfoodbot, а при смене статуса бот сам пишет клиенту. Устанавливается на телефон как приложение.",
+      en: "Burger and wrap delivery site. The burger on the home page is alive: it follows your cursor, winks and jumps when tapped. Combo builder, promo codes, a wheel of fortune and 5% cashback. Every order reaches the owner through @olovfoodbot, and the bot messages the customer when the status changes. Installs on a phone like an app.",
+    },
     name: "OLOV FOOD",
     text: {
       uz: "Fast food sayti. Burger sichqonchaga qaraydi.",
@@ -30,6 +42,12 @@ const SITES = [
   },
   {
     id: "hojiakbar",
+    repo: "https://github.com/Javohir877/byhojiakbar-portfolio",
+    about: {
+      uz: "Video montajchi uchun portfolio: futbol editlar, Reels va Shorts. O'zimiz yozgan video pleyer va ariza formasi bor — ariza to'g'ri Telegramga tushadi. Videolar ffmpeg bilan siqilgan, shuning uchun sayt telefonda ham tez ochiladi.",
+      ru: "Портфолио видеомонтажёра: футбольные эдиты, Reels и Shorts. Свой видеоплеер и форма заявки — заявка приходит прямо в Telegram. Видео сжаты через ffmpeg, поэтому сайт быстро открывается и на телефоне.",
+      en: "Portfolio for a video editor: football edits, Reels and Shorts. A custom video player and an order form that sends requests straight to Telegram. Videos are compressed with ffmpeg, so the site opens fast on phones too.",
+    },
     name: "By.Hojiakbar",
     text: {
       uz: "Video montajchi uchun portfolio va o'z pleyeri.",
@@ -42,6 +60,12 @@ const SITES = [
   },
   {
     id: "startap",
+    repo: "https://github.com/Javohir877/startap-sayohati",
+    about: {
+      uz: "Sinf uchun interaktiv ta'lim o'yini: uch guruh startap jamoasiga aylanib Pre-seed → Seed → Series A, B, C → Exit bosqichlaridan o'tadi. Har bosqichda strategik qaror, tasodif kartasi, investor taklifi va 30 soniyalik bilim savoli bor. Maqsad — eng foydali exit va eng bilimdon guruh bo'lish.",
+      ru: "Интерактивная учебная игра для класса: три группы становятся стартап-командами и проходят Pre-seed → Seed → Series A, B, C → Exit. На каждом этапе — стратегическое решение, карта случая, предложение инвестора и вопрос на 30 секунд. Цель — самый выгодный exit и звание самой знающей группы.",
+      en: "Classroom learning game: three groups become startup teams and go through Pre-seed → Seed → Series A, B, C → Exit. Each stage has a strategic decision, a chance card, an investor offer and a 30-second quiz question. The goal is the most profitable exit and the best-informed team.",
+    },
     name: "Startap Sayohati",
     text: {
       uz: "Sinf uchun interaktiv o'yin: guruhlar Pre-seed'dan Exit'gacha startap quradi.",
@@ -109,7 +133,9 @@ const BOTS = [
   {
     user: "dzmafia",
     platform: "discord",
-    url: "https://discord.com/oauth2/authorize?client_id=1567548963098206410",
+    // Developer Portal'dagi standart o'rnatish faqat applications.commands — botning o'zi kirmaydi,
+    // shuning uchun bot doirasi va README'dagi ruxsatlar aniq yozilgan
+    url: "https://discord.com/oauth2/authorize?client_id=1567548963098206410&scope=bot+applications.commands&permissions=361045773312",
     name: "DZ MAFIA",
     img: "/img/bot-dzmafia.png",
     text: {

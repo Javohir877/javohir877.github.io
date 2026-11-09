@@ -6,7 +6,8 @@ import path from "node:path";
 import { SITES, BOTS, SCREENS } from "./data.js";
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
-const PORT = process.env.PORT || 3001;
+// 3001 band bo'lishi mumkin (By.Hojiakbar serveri) — shuning uchun 3010
+const PORT = process.env.PORT || 3010;
 
 const app = express();
 

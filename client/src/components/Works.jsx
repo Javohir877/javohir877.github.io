@@ -59,12 +59,24 @@ export function Tilt({ className = "", max = 9, as: Tag = "div", children, ...re
   );
 }
 
-function WorkCard({ site, i }) {
+function WorkCard({ site, i, onOpen }) {
   const { t, pick } = useLang();
   const reveal = useReveal();
   return (
     <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ transitionDelay: (i % 2) * 0.08 + "s" }}>
-      <Tilt as="a" className={"card c-" + site.id} href={site.url} target="_blank" rel="noopener">
+      {/* oddiy bosish — loyiha oynasi, g'ildirakcha / Ctrl bilan — saytning o'zi yangi tabda */}
+      <Tilt
+        as="a"
+        className={"card c-" + site.id}
+        href={site.url}
+        target="_blank"
+        rel="noopener"
+        onClick={(e) => {
+          if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+          e.preventDefault();
+          onOpen(i);
+        }}
+      >
         <img className="c-img" src={site.img} alt={site.name} width="1440" height="900" loading="lazy" />
         {site.phone && (
           <div className="c-phone"><img src={site.phone} alt="" width="780" height="1688" loading="lazy" /></div>
@@ -75,21 +87,21 @@ function WorkCard({ site, i }) {
           {site.tags?.length > 0 && (
             <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>
           )}
-          <span className="c-go">{t.works.site}</span>
+          <span className="c-go">{t.works.details}</span>
         </div>
       </Tilt>
     </div>
   );
 }
 
-export default function Works({ sites }) {
+export default function Works({ sites, onOpen }) {
   const { t } = useLang();
   const title = useReveal();
   return (
     <section className="sec" id="ishlar">
       <h2 className="sec-title rv" ref={title}>{t.works.title}</h2>
       <div className="works">
-        {sites.map((s, i) => <WorkCard key={s.id} site={s} i={i} />)}
+        {sites.map((s, i) => <WorkCard key={s.id} site={s} i={i} onOpen={onOpen} />)}
       </div>
     </section>
   );

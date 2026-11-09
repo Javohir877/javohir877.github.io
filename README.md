@@ -11,11 +11,11 @@ Sayt: https://javohir877.github.io
 ## Ishga tushirish (kompyuterda)
 
 ```
-cd server && npm install && npm run dev      # http://localhost:3001
+cd server && npm install && npm run dev      # http://localhost:3010
 cd client && npm install && npm run dev      # http://localhost:5173
 ```
 
-Vite `/api` so'rovlarini 3001-portdagi serverga yo'naltiradi.
+Vite `/api` so'rovlarini 3010-portdagi serverga yo'naltiradi.
 
 ## Internetga chiqarish
 

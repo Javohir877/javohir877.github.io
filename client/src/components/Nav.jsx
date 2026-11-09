@@ -4,7 +4,7 @@ import { LANGS, useLang } from "../i18n.jsx";
 const SECTIONS = ["ishlar", "botlar", "jarayon", "github", "aloqa"];
 const KEYS = ["works", "bots", "process", "github", "contact"];
 
-export default function Nav() {
+export default function Nav({ onSearch }) {
   const { t, lang, setLang } = useLang();
   const [active, setActive] = useState("");
   const [hidden, setHidden] = useState(false);
@@ -41,6 +41,9 @@ export default function Nav() {
           <a key={id} href={"#" + id} className={(active === id ? "on " : "") + "n-" + KEYS[i]}>{t.nav[KEYS[i]]}</a>
         ))}
       </nav>
+      <button className="nav-search" onClick={onSearch} aria-label={t.palette.hint} title={t.palette.hint + " (Ctrl+K)"}>
+        <span aria-hidden="true">⌕</span><kbd>Ctrl K</kbd>
+      </button>
       <div className="langs" role="group" aria-label="Til / Язык / Language">
         {LANGS.map((l) => (
           <button key={l} className={l === lang ? "on" : ""} onClick={() => setLang(l)} aria-pressed={l === lang}>{l}</button>
