@@ -36,7 +36,7 @@ export default function Palette({ open, setOpen, sites, bots, onProject }) {
     const all = [
       ...SECTIONS.map(([id, key]) => ({
         kind: t.palette.section, label: t.nav[key], icon: "#",
-        run: () => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }),
+        run: () => (id === "kvant" ? location.assign("/kvant/") : document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })),
       })),
       ...sites.map((s, i) => ({
         kind: t.palette.project, label: s.name, extra: pick(s.text), icon: "◆",

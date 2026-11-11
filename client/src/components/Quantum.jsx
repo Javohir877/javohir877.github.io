@@ -5,7 +5,7 @@ import { useLang } from "../i18n.jsx";
 // 3D sahna faqat bo'limga yaqinlashganda yuklanadi
 const QuantumScene = lazy(() => import("./QuantumScene.jsx"));
 
-export default function Quantum() {
+export default function Quantum({ page }) {
   const { t } = useLang();
   const q = t.quantum;
   const [active, setActive] = useState(0);
@@ -46,9 +46,9 @@ export default function Quantum() {
   const [temp, name] = q.stages[active];
 
   return (
-    <section className="sec quantum" id="kvant">
+    <section className={"sec quantum" + (page ? " q-page" : "")} id="kvant">
       <div className="rv q-head" ref={head}>
-        <h2 className="sec-title">{q.title}</h2>
+        {page ? <h1 className="sec-title">{q.title}</h1> : <h2 className="sec-title">{q.title}</h2>}
         <p className="sec-sub">{q.sub}</p>
       </div>
       <div className="rv q-side" ref={list}>

@@ -38,7 +38,7 @@ export default function Nav({ onSearch }) {
       <a className="logo" href="#">Javohir<i>.</i></a>
       <nav>
         {SECTIONS.map((id, i) => (
-          <a key={id} href={"#" + id} className={(active === id ? "on " : "") + "n-" + KEYS[i]}>{t.nav[KEYS[i]]}</a>
+          <a key={id} href={id === "kvant" ? "/kvant/" : "#" + id} className={(active === id ? "on " : "") + "n-" + KEYS[i]}>{t.nav[KEYS[i]]}</a>
         ))}
       </nav>
       <button className="nav-search" onClick={onSearch} aria-label={t.palette.hint} title={t.palette.hint + " (Ctrl+K)"}>

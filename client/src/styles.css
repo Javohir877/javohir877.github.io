@@ -816,6 +816,40 @@ kbd {
 }
 .q-cap:hover { border-color: var(--blue); }
 
+/* bosh sahifadagi kvant kartasi */
+.q-teaser {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  align-items: center;
+  gap: 40px;
+  padding: 44px 48px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--card);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.4s, transform 0.4s var(--ease);
+}
+.q-teaser:hover { border-color: rgba(140, 200, 255, 0.45); transform: translateY(-3px); }
+.qt-tag { font: 13px var(--mono); color: var(--dim); margin-bottom: 14px; }
+.qt-sub { max-width: 560px; margin-top: 14px; color: var(--dim); font-size: 18px; }
+.qt-go { display: inline-block; margin-top: 22px; color: var(--blue); font-weight: 600; }
+.q-teaser:hover .qt-go { text-decoration: underline; text-underline-offset: 4px; }
+.qt-art { width: 100%; height: auto; overflow: visible; }
+.qt-pipe { stroke: #8a8f9c; stroke-width: 3; }
+.qt-cable { fill: none; stroke: #c8743c; stroke-width: 1.2; opacity: 0.8; }
+.qt-plate { fill: rgba(224, 169, 72, 0.08); stroke: #e0a948; stroke-width: 1.6; animation: qt-glow 3s ease-in-out infinite; }
+.qt-chip { fill: #2a1a10; stroke: #d99050; stroke-width: 1.2; }
+.qt-qubit { fill: var(--blue); animation: qt-blink 1.6s ease-in-out infinite; }
+@keyframes qt-glow { 0%, 70%, 100% { stroke: #e0a948; } 20% { stroke: var(--blue); } }
+@keyframes qt-blink { 50% { opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) { .qt-plate, .qt-qubit { animation: none; } }
+
+/* /kvant/ sahifasi */
+.q-page { min-height: 100svh; padding-top: 110px; }
+.q-page .q-stage { height: min(780px, 86vh); }
+.q-foot { justify-content: center; gap: 28px; }
+
 /* ---------- telefon ---------- */
 
 @media (max-width: 860px) {
@@ -863,6 +897,11 @@ kbd {
   .gh-repos, .gh-grid.offline .gh-repos { grid-template-columns: 1fr; }
   .nav nav .n-process, .nav nav .n-quantum, .nav nav .n-github { display: none; }
   .quantum { grid-template-columns: 1fr; grid-template-areas: "head" "stage" "list"; }
+  .q-page { padding-top: 90px; }
+  .q-teaser { position: relative; grid-template-columns: 1fr; padding: 26px 22px; border-radius: 22px; }
+  .qt-art { position: absolute; top: 24px; right: 20px; width: 64px; }
+  .q-teaser .sec-title { padding-right: 70px; }
+  .qt-sub { font-size: 16px; }
   .q-stage { height: clamp(440px, 125vw, 580px); margin-top: 10px; }
   .q-gl { bottom: 100px; }
   .q-ui .hint { padding: 0 10px; }

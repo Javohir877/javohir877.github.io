@@ -46,6 +46,10 @@ const DICT = {
       open: "Qopqoqni ochish",
       closedNote: "Ishlayotganda qandil vakuum idishi ichida bo'ladi",
       hint: "sudrang — aylanadi · diskni bosing — nima ekanini ko'rasiz",
+      back: "← Portfolio",
+      tag: "Qiziqish · 3D",
+      teaser: "Haqiqiy kvant kompyuterlar qanday tuzilgan: oltin «qandil», 10 mK sovuqlik va kubitlar. three.js'da noldan yasagan interaktiv model.",
+      go: "Modelni ochish →",
     },
     gh: {
       title: "GitHub'da hozir",
@@ -104,6 +108,10 @@ const DICT = {
       open: "Открыть кожух",
       closedNote: "Во время работы люстра находится внутри вакуумного кожуха",
       hint: "тяните — вращается · нажмите на диск — узнаете, что это",
+      back: "← Портфолио",
+      tag: "Интерес · 3D",
+      teaser: "Как устроены настоящие квантовые компьютеры: золотая «люстра», холод 10 mK и кубиты. Интерактивная модель, собранная с нуля на three.js.",
+      go: "Открыть модель →",
     },
     gh: {
       title: "Сейчас на GitHub",
@@ -162,6 +170,10 @@ const DICT = {
       open: "Open the shield",
       closedNote: "While running, the chandelier sits inside a vacuum can",
       hint: "drag — it spins · tap a plate — see what it is",
+      back: "← Portfolio",
+      tag: "Side interest · 3D",
+      teaser: "How real quantum computers are built: a golden \"chandelier\", 10 mK cold and qubits. An interactive model I built from scratch in three.js.",
+      go: "Open the model →",
     },
     gh: {
       title: "On GitHub now",

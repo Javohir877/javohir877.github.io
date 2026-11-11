@@ -3,7 +3,7 @@
 // internet bo'lmasa, saqlangan nusxa ochiladi. /assets/ fayllari nomida hash bor,
 // shuning uchun ular keshdan beriladi; rasmlar keshdan beriladi va fonda yangilanadi.
 const CACHE = "javohir-v2";
-const SHELL = ["/", "/favicon.svg", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
+const SHELL = ["/", "/kvant/", "/favicon.svg", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -32,7 +32,8 @@ self.addEventListener("fetch", (e) => {
   // sahifa: avval internet, bo'lmasa kesh
   if (req.mode === "navigate") {
     e.respondWith(
-      fetch(req).then((res) => put("/", res.clone()) && res).catch(() => caches.match("/"))
+      fetch(req).then((res) => put(url.pathname, res.clone()) && res)
+        .catch(() => caches.match(url.pathname).then((hit) => hit || caches.match("/")))
     );
     return;
   }
