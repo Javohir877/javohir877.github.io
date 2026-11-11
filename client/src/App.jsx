@@ -8,7 +8,6 @@ import Hero from "./components/Hero.jsx";
 import Works from "./components/Works.jsx";
 import Bots from "./components/Bots.jsx";
 import Process from "./components/Process.jsx";
-import QuantumTeaser from "./components/QuantumTeaser.jsx";
 import GitHub from "./components/GitHub.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
@@ -65,12 +64,11 @@ export default function App() {
     <>
       <Backdrop />
       <Nav onSearch={() => setPalette(true)} />
-      <Hero phase={editor.phase} screens={data.screens} bots={data.bots} />
+      <Hero phase={editor.phase} bots={data.bots} />
       <main>
         <Works sites={data.sites} onOpen={openProject} />
         <Bots bots={data.bots} />
         <Process phase={editor.phase} html={editor.html} />
-        <QuantumTeaser />
         <GitHub sites={data.sites} />
         <Contact />
       </main>

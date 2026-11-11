@@ -1,14 +1,29 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n.jsx";
 
 // three.js og'ir, shuning uchun 3D sahna alohida yuklanadi
-const PhoneScene = lazy(() => import("./PhoneScene.jsx"));
+const QuantumScene = lazy(() => import("./QuantumScene.jsx"));
 
-export default function Hero({ phase, screens, bots }) {
-  const { t, pick } = useLang();
-  const [screen, setScreen] = useState(0);
-  const [goTo, setGoTo] = useState(null);
+export default function Hero({ phase, bots }) {
+  const { t } = useLang();
+  const q = t.quantum;
+  const [active, setActive] = useState(4);
+  const [closed, setClosed] = useState(false);
+  const touched = useRef(0);
   const cls = (i) => (i === phase ? "on" : i < phase ? "done" : "");
+
+  // hech kim tegmasa, qandilning bosqichlari navbat bilan yonadi
+  useEffect(() => {
+    if (closed) return;
+    const id = setInterval(() => {
+      if (Date.now() - touched.current > 9000) setActive((a) => (a + 1) % q.stages.length);
+    }, 3200);
+    return () => clearInterval(id);
+  }, [closed, q.stages.length]);
+
+  const pick = (i) => { touched.current = Date.now(); setActive(i); setClosed(false); };
+  const toggle = () => { touched.current = Date.now(); setClosed((c) => !c); };
+  const [temp, name] = q.stages[active];
 
   return (
     <section className="hero">
@@ -27,22 +42,15 @@ export default function Hero({ phase, screens, bots }) {
 
       <div className="stage">
         <Suspense fallback={null}>
-          <PhoneScene screens={screens} bots={bots} goTo={goTo} onScreen={setScreen} />
+          <QuantumScene hero bots={bots} active={active} closed={closed} onPick={pick} onToggle={toggle} />
         </Suspense>
         <div className="stage-ui">
-          <p className="screen-name">{pick(screens[screen]?.name)}</p>
-          <div className="dots" role="tablist" aria-label={t.hero.screens}>
-            {screens.map((s, i) => (
-              <button
-                key={i}
-                role="tab"
-                aria-selected={i === screen}
-                aria-label={pick(s.name)}
-                className={i === screen ? "on" : ""}
-                onClick={() => setGoTo({ i, at: Date.now() })}
-              />
-            ))}
-          </div>
+          <p className="screen-name" aria-live="polite">
+            {closed ? q.closedNote : <><span className="q-temp">{temp}</span> {name}</>}
+          </p>
+          <p className="stage-links">
+            <a className="link" href="/kvant/">{t.hero.more}</a>
+          </p>
           <p className="hint">{t.hero.hint}</p>
         </div>
       </div>

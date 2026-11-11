@@ -139,7 +139,7 @@ function buildCryostat() {
   return { root, plates, chipMat, qubits, can, canMat, pick };
 }
 
-export default function QuantumScene({ active, closed, onPick, onToggle }) {
+export default function QuantumScene({ active, closed, onPick, onToggle, bots = [], hero = false }) {
   const wrap = useRef(null);
   const canvasRef = useRef(null);
   const props = useRef({ active, closed, onPick, onToggle });
@@ -176,6 +176,30 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
     const { root, plates, chipMat, qubits, can, canMat, pick } = buildCryostat();
     scene.add(root);
 
+    // bosh sahifada: qandil atrofida botlarning tangalari aylanadi, bosilsa bot ochiladi
+    const loader = new THREE.TextureLoader();
+    const CR = 0.17, CT = 0.03;
+    const coinRim = new THREE.MeshPhysicalMaterial({ color: 0xd9dbe0, metalness: 1, roughness: 0.25 });
+    const linked = bots.filter((b) => b.url);
+    const coins = linked.map((b, i) => {
+      const tex = loader.load(b.img);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const coin = new THREE.Group();
+      const edge = new THREE.Mesh(new THREE.CylinderGeometry(CR, CR, CT, 64), coinRim);
+      edge.rotation.x = Math.PI / 2;
+      const face = new THREE.Mesh(new THREE.CircleGeometry(CR * 0.94, 64), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55 }));
+      face.position.z = CT / 2 + 0.001;
+      const backFace = face.clone();
+      backFace.rotation.y = Math.PI;
+      backFace.position.z = -face.position.z;
+      coin.add(edge, face, backFace);
+      coin.userData = { url: b.url, phase: (i / linked.length) * Math.PI * 2 };
+      coin.children.forEach((m) => (m.userData = coin.userData));
+      scene.add(coin);
+      return coin;
+    });
+
     /* boshqaruv */
     let spin = 0, spinVel = 0, dragging = false, dragX = 0, moved = 0, hover = -1, capP = 0;
     const ray = new THREE.Raycaster();
@@ -184,6 +208,8 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
       const r = canvas.getBoundingClientRect();
       ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
       ray.setFromCamera(ndc, camera);
+      const c = coins.length ? ray.intersectObjects(coins, true)[0] : null;
+      if (c) return { url: c.object.userData.url };
       if (props.current.closed) return ray.intersectObject(can, true)[0] ? "can" : null;
       const h = ray.intersectObjects(pick, false)[0];
       return h ? h.object.userData.stage : null;
@@ -212,7 +238,8 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
       dragging = false;
       if (moved > 6) return;
       const h = hit(e);
-      if (h === "can") props.current.onToggle?.();
+      if (h?.url) window.open(h.url, "_blank", "noopener");
+      else if (h === "can") props.current.onToggle?.();
       else if (typeof h === "number") props.current.onPick?.(h);
     };
     const leave = () => { hover = -1; };
@@ -227,7 +254,7 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
       camera.aspect = w / h;
       // butun qandil (ilgaklardan qopqoq tubigacha) har qanday nisbatda sig'adi
       const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-      const z = Math.max(1.62 / t, 0.95 / (t * camera.aspect)) + 0.4;
+      const z = Math.max(1.62 / t, (hero ? 1.42 : 0.95) / (t * camera.aspect)) + 0.4;
       camera.position.set(0, 0.36, z);
       camera.lookAt(0, 0.3, 0);
       camera.updateProjectionMatrix();
@@ -271,6 +298,14 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
       can.position.y = can.userData.top - (1 - capP) * 2.6;
       canMat.opacity = Math.min(1, capP * 1.4);
 
+      coins.forEach((c, i) => {
+        const a = c.userData.phase + t * 0.4 * k;
+        // tangalar qandil orqasida va yonlarida aylanadi — uni hech qachon to'smaydi
+        c.position.set(Math.cos(a) * 1.18, 0.3 + Math.sin(a * 2 + i) * 0.45, -Math.abs(Math.sin(a)) * 0.8);
+        c.lookAt(camera.position);
+        c.rotateY(Math.sin(t * 1.3 + i) * 0.45 * k);
+      });
+
       renderer.render(scene, camera);
     };
     frame();
@@ -286,7 +321,7 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
       canvas.removeEventListener("pointerleave", leave);
       scene.traverse((o) => {
         o.geometry?.dispose();
-        [].concat(o.material || []).forEach((m) => m.dispose());
+        [].concat(o.material || []).forEach((m) => { m.map?.dispose(); m.dispose(); });
       });
       pmrem.dispose();
       renderer.dispose();
@@ -295,7 +330,7 @@ export default function QuantumScene({ active, closed, onPick, onToggle }) {
   }, []);
 
   return (
-    <div className="q-gl" ref={wrap}>
+    <div className={"q-gl" + (hero ? " hero-gl" : "")} ref={wrap}>
       <canvas ref={canvasRef} aria-label="3D kvant kompyuter modeli" />
     </div>
   );
