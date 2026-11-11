@@ -2,7 +2,7 @@
 // Sahifa (HTML) har doim avval internetdan olinadi — yangilanish darhol ko'rinadi;
 // internet bo'lmasa, saqlangan nusxa ochiladi. /assets/ fayllari nomida hash bor,
 // shuning uchun ular keshdan beriladi; rasmlar keshdan beriladi va fonda yangilanadi.
-const CACHE = "javohir-v2";
+const CACHE = "javohir-v3";
 const SHELL = ["/", "/kvant/", "/favicon.svg", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (e) => {
