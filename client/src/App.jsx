@@ -8,6 +8,7 @@ import Hero from "./components/Hero.jsx";
 import Works from "./components/Works.jsx";
 import Bots from "./components/Bots.jsx";
 import Process from "./components/Process.jsx";
+import Quantum from "./components/Quantum.jsx";
 import GitHub from "./components/GitHub.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
@@ -69,6 +70,7 @@ export default function App() {
         <Works sites={data.sites} onOpen={openProject} />
         <Bots bots={data.bots} />
         <Process phase={editor.phase} html={editor.html} />
+        <Quantum />
         <GitHub sites={data.sites} />
         <Contact />
       </main>

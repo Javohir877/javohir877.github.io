@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { LANGS, useLang } from "../i18n.jsx";
 
-const SECTIONS = [["ishlar", "works"], ["botlar", "bots"], ["jarayon", "process"], ["github", "github"], ["aloqa", "contact"]];
+const SECTIONS = [["ishlar", "works"], ["botlar", "bots"], ["jarayon", "process"], ["kvant", "quantum"], ["github", "github"], ["aloqa", "contact"]];
 const LANG_NAMES = { uz: "O'zbekcha", ru: "Русский", en: "English" };
 
 export default function Palette({ open, setOpen, sites, bots, onProject }) {

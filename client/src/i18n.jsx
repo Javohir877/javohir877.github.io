@@ -6,7 +6,7 @@ export const LANGS = ["uz", "ru", "en"];
 
 const DICT = {
   uz: {
-    nav: { works: "Ishlar", bots: "Botlar", process: "Jarayon", github: "GitHub", contact: "Aloqa" },
+    nav: { works: "Ishlar", bots: "Botlar", process: "Jarayon", quantum: "Kvant", github: "GitHub", contact: "Aloqa" },
     hero: {
       eyebrow: "Sayt · Telegram bot · Android ilova",
       // fe'llar alohida — ular navbat bilan yonadi
@@ -31,6 +31,22 @@ const DICT = {
       ],
       phases: ["yozish", "tahrir", "sayqal", "ishga tushirish"],
     },
+    quantum: {
+      title: "Kvant kompyuter ichidan",
+      sub: "Qiziqib o'rganayotgan mavzuim. Modelni three.js'da noldan yasadim: haqiqiy kvant kompyuterlar shunday oltin «qandil» ichida, koinotdan ham sovuqroq joyda ishlaydi.",
+      stages: [
+        ["50 K", "Birinchi to'siq", "Tashqaridan kirayotgan issiqlikning katta qismini shu disk ushlab qoladi."],
+        ["4 K", "Pulse-tube bosqichi", "Asosiy sovutgich shu yergacha sovutadi. Kubitlardan kelgan zaif signallarni kuchaytirgichlar shu yerda turadi."],
+        ["0.8 K", "Still", "Geliy-3 bug'lanib, haroratni yanada pastga tushiradi."],
+        ["100 mK", "Sovuq disk", "Kabellar orqali keladigan issiqlik shovqini shu yerda so'ndiriladi."],
+        ["10 mK", "Aralashtirish kamerasi", "Eng sovuq joy — koinot fonidan (2.7 K) taxminan 270 marta sovuqroq."],
+        ["Kubitlar", "Protsessor", "O'ta o'tkazuvchan kubitlar bir vaqtda 0 va 1 holatida bo'la oladi. Shuning uchun ularni shunchalik sovuq saqlash kerak."],
+      ],
+      close: "Qopqoqni yopish",
+      open: "Qopqoqni ochish",
+      closedNote: "Ishlayotganda qandil vakuum idishi ichida bo'ladi",
+      hint: "sudrang — aylanadi · diskni bosing — nima ekanini ko'rasiz",
+    },
     gh: {
       title: "GitHub'da hozir",
       sub: "Oxirgi 8 hafta faolligi va yaqinda yangilangan loyihalar — GitHub'dan jonli olinadi.",
@@ -49,7 +65,7 @@ const DICT = {
   },
 
   ru: {
-    nav: { works: "Работы", bots: "Боты", process: "Процесс", github: "GitHub", contact: "Связь" },
+    nav: { works: "Работы", bots: "Боты", process: "Процесс", quantum: "Квант", github: "GitHub", contact: "Связь" },
     hero: {
       eyebrow: "Сайт · Telegram-бот · Android-приложение",
       parts: ["Я Жавохир. Вместе с искусственным интеллектом я ", 0, " код, ", 1, ", ", 2, " и ", 3, " его."],
@@ -73,6 +89,22 @@ const DICT = {
       ],
       phases: ["пишу", "правлю", "шлифую", "запуск"],
     },
+    quantum: {
+      title: "Квантовый компьютер изнутри",
+      sub: "Тема, которую я изучаю из интереса. Модель собрал с нуля на three.js: настоящие квантовые компьютеры работают внутри такой золотой «люстры», в месте холоднее космоса.",
+      stages: [
+        ["50 K", "Первый барьер", "Этот диск задерживает большую часть тепла, идущего снаружи."],
+        ["4 K", "Ступень pulse-tube", "Основной охладитель доводит до этой температуры. Здесь стоят усилители слабых сигналов от кубитов."],
+        ["0.8 K", "Still", "Испаряется гелий-3 и опускает температуру ещё ниже."],
+        ["100 mK", "Холодная пластина", "Здесь гасится тепловой шум, идущий по кабелям."],
+        ["10 mK", "Камера смешения", "Самое холодное место — примерно в 270 раз холоднее космического фона (2,7 K)."],
+        ["Кубиты", "Процессор", "Сверхпроводящие кубиты могут быть одновременно 0 и 1. Поэтому их держат в таком холоде."],
+      ],
+      close: "Закрыть кожух",
+      open: "Открыть кожух",
+      closedNote: "Во время работы люстра находится внутри вакуумного кожуха",
+      hint: "тяните — вращается · нажмите на диск — узнаете, что это",
+    },
     gh: {
       title: "Сейчас на GitHub",
       sub: "Активность за последние 8 недель и недавно обновлённые проекты — данные берутся с GitHub в реальном времени.",
@@ -91,7 +123,7 @@ const DICT = {
   },
 
   en: {
-    nav: { works: "Work", bots: "Bots", process: "Process", github: "GitHub", contact: "Contact" },
+    nav: { works: "Work", bots: "Bots", process: "Process", quantum: "Quantum", github: "GitHub", contact: "Contact" },
     hero: {
       eyebrow: "Websites · Telegram bots · Android apps",
       parts: ["I'm Javohir. Together with AI I ", 0, " code, ", 1, " it, ", 2, " it and ", 3, " it."],
@@ -114,6 +146,22 @@ const DICT = {
         ["Ship", "Server, domain, Telegram bot, GitHub Pages — I stay with it until it runs online."],
       ],
       phases: ["write", "edit", "polish", "ship"],
+    },
+    quantum: {
+      title: "Inside a quantum computer",
+      sub: "A topic I'm exploring out of curiosity. I built the model from scratch in three.js: real quantum computers run inside a golden \"chandelier\" like this, colder than outer space.",
+      stages: [
+        ["50 K", "First shield", "This plate stops most of the heat coming in from outside."],
+        ["4 K", "Pulse-tube stage", "The main cooler gets things down to here. Amplifiers for the faint qubit signals sit on this plate."],
+        ["0.8 K", "Still", "Helium-3 evaporates here and pulls the temperature down further."],
+        ["100 mK", "Cold plate", "Thermal noise travelling down the cables is damped here."],
+        ["10 mK", "Mixing chamber", "The coldest spot — about 270 times colder than the cosmic background (2.7 K)."],
+        ["Qubits", "Processor", "Superconducting qubits can be 0 and 1 at the same time. That's why they have to be kept this cold."],
+      ],
+      close: "Close the shield",
+      open: "Open the shield",
+      closedNote: "While running, the chandelier sits inside a vacuum can",
+      hint: "drag — it spins · tap a plate — see what it is",
     },
     gh: {
       title: "On GitHub now",

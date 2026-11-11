@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { LANGS, useLang } from "../i18n.jsx";
 
-const SECTIONS = ["ishlar", "botlar", "jarayon", "github", "aloqa"];
-const KEYS = ["works", "bots", "process", "github", "contact"];
+const SECTIONS = ["ishlar", "botlar", "jarayon", "kvant", "github", "aloqa"];
+const KEYS = ["works", "bots", "process", "quantum", "github", "contact"];
 
 export default function Nav({ onSearch }) {
   const { t, lang, setLang } = useLang();
