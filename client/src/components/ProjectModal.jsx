@@ -78,6 +78,7 @@ export default function ProjectModal({ sites, index, onClose, onNav }) {
             <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>
             <p className="pm-links">
               <a className="btn" href={site.url} target="_blank" rel="noopener">{t.works.open}</a>
+              {site.apk && <a className="link" href={site.apk} rel="noopener">{t.works.apk}</a>}
               {site.repo && <a className="link" href={site.repo} target="_blank" rel="noopener">{t.works.code}</a>}
             </p>
           </div>

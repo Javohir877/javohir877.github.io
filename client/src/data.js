@@ -59,6 +59,27 @@ const SITES = [
     img: "/img/hojiakbar.webp",
   },
   {
+    id: "hisobla",
+    repo: "https://github.com/Javohir877/hisobla",
+    apk: "https://github.com/Javohir877/hisobla/releases/latest/download/hisobla.apk",
+    about: {
+      uz: "Universal kalkulyator: oddiy va ilmiy rejim, o'lchov konvertori, foiz, tana massasi (BMI) va kredit kalkulyatorlari. Kasrlar BigInt asosida aniq hisoblanadi: 1/2 + 1/3 = 5/6, 0,1 + 0,2 = 0,3, davriy kasrlar 0,(3) ham tushuniladi. Kasrlar bo'limi qisqartirishni (EKUB, Yevklid algoritmi) bosqichma-bosqich ko'rsatadi va mashq beradi. Internetsiz ishlaydi, telefonga o'rnatiladi; Android APK GitHub Actions'da avtomatik yig'iladi.",
+      ru: "Универсальный калькулятор: обычный и научный режим, конвертер единиц, проценты, индекс массы тела (BMI) и кредитный калькулятор. Дроби считаются точно на BigInt: 1/2 + 1/3 = 5/6, 0,1 + 0,2 = 0,3, понимает и периодические дроби 0,(3). Раздел дробей пошагово показывает сокращение (НОД, алгоритм Евклида) и даёт упражнения. Работает без интернета, ставится на телефон; Android APK собирается автоматически в GitHub Actions.",
+      en: "An all-in-one calculator: basic and scientific modes, unit converter, percentages, BMI and a loan calculator. Fractions are exact, built on BigInt: 1/2 + 1/3 = 5/6, 0.1 + 0.2 = 0.3, and repeating decimals like 0.(3) work too. The fractions section shows simplification step by step (GCD, Euclid's algorithm) and has practice drills. Works offline, installs on a phone, and the Android APK is built automatically by GitHub Actions.",
+    },
+    name: "Hisobla",
+    text: {
+      uz: "Kalkulyator: sayt va Android ilova. Kasrlar bosqichma-bosqich yechiladi.",
+      ru: "Калькулятор: сайт и Android-приложение. Дроби решаются по шагам.",
+      en: "Calculator: website and Android app. Fractions solved step by step.",
+    },
+    tags: ["JavaScript", "BigInt", "PWA", "Android"],
+    url: "https://javohir877.github.io/hisobla/",
+    img: "/img/hisobla.webp",
+    phone: "/img/hisobla-m.webp",
+    wide: true,
+  },
+  {
     id: "startap",
     repo: "https://github.com/Javohir877/startap-sayohati",
     about: {
