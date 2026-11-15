@@ -23,6 +23,28 @@ const SITES = [
     wide: true,
   },
   {
+    id: "navo",
+    repo: "https://github.com/Javohir877/navo",
+    exe: "https://github.com/Javohir877/navo/releases/latest/download/Navo-Setup.exe",
+    apk: "https://github.com/Javohir877/navo/releases/latest/download/Navo.apk",
+    about: {
+      uz: "Windows va Android uchun musiqa pleyeri. Qo'shiq oldindan tahlil qilinadi, effektlar har bir 808 zarbasiga aniq tushadi: drop'larda kuchli, sokin qismlarda jim. Uslubni o'zi aniqlaydi (Phonk, Rep, Elektron, Pop), Slowed + Reverb, Nightcore va 8D rejimlari, karaoke uslubidagi qo'shiq matni, 10 polosali ekvalayzer bor. MP3, FLAC, WAV, OPUS va boshqa formatlarni o'ynaydi, Windows'da ffmpeg orqali yanada ko'prog'ini. Bitta interfeys kodi: Windows'da Electron, Android'da Capacitor.",
+      ru: "Музыкальный плеер для Windows и Android. Трек заранее анализируется, и эффекты точно попадают в каждый удар 808: на дропах — мощно, в тихих местах — тишина. Сам определяет стиль (Phonk, рэп, электроника, поп), есть режимы Slowed + Reverb, Nightcore и 8D, текст песни в стиле караоке и 10-полосный эквалайзер. Играет MP3, FLAC, WAV, OPUS и другие форматы, а на Windows через ffmpeg — ещё больше. Один код интерфейса: Electron на Windows, Capacitor на Android.",
+      en: "A music player for Windows and Android. Each track is analysed ahead of time so the effects land exactly on every 808 hit: big on the drops, quiet in the calm parts. It detects the style on its own (Phonk, rap, electronic, pop), and has Slowed + Reverb, Nightcore and 8D modes, karaoke-style lyrics and a 10-band equalizer. Plays MP3, FLAC, WAV, OPUS and more, with even more formats on Windows via ffmpeg. One interface codebase: Electron on Windows, Capacitor on Android.",
+    },
+    name: "Navo",
+    text: {
+      uz: "Musiqa pleyeri: Windows va Android. Effektlar bass bilan birga uradi.",
+      ru: "Музыкальный плеер для Windows и Android. Эффекты бьют в такт басу.",
+      en: "Music player for Windows and Android. Effects hit with the bass.",
+    },
+    tags: ["Electron", "Capacitor", "Web Audio", "ffmpeg"],
+    url: "https://javohir877.github.io/navo/",
+    img: "/img/navo.webp",
+    phone: "/img/navo-m.webp",
+    wide: true,
+  },
+  {
     id: "olov",
     repo: "https://github.com/Javohir877/OLOV-FOOD",
     about: {
