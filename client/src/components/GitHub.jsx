@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
+import SplitTitle from "./SplitTitle.jsx";
 
 const USER = "Javohir877";
 // portfolioning o'zi va ishlamaydigan loyihalar ko'rsatilmaydi
@@ -108,7 +109,7 @@ export default function GitHub({ sites = [] }) {
   return (
     <section className="sec gh" id="github">
       <div className="rv" ref={head}>
-        <h2 className="sec-title">{t.gh.title}</h2>
+        <SplitTitle text={t.gh.title} />
         <p className="sec-sub">{t.gh.sub}</p>
       </div>
       <div className={"gh-grid rv" + (offline ? " offline" : "")} ref={body}>

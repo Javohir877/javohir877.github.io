@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
+import SplitTitle from "./SplitTitle.jsx";
 
 // 3D sahna faqat bo'limga yaqinlashganda yuklanadi
 const QuantumScene = lazy(() => import("./QuantumScene.jsx"));
@@ -48,7 +49,7 @@ export default function Quantum({ page }) {
   return (
     <section className={"sec quantum" + (page ? " q-page" : "")} id="kvant">
       <div className="rv q-head" ref={head}>
-        {page ? <h1 className="sec-title">{q.title}</h1> : <h2 className="sec-title">{q.title}</h2>}
+        <SplitTitle as={page ? "h1" : "h2"} text={q.title} />
         <p className="sec-sub">{q.sub}</p>
       </div>
       <div className="rv q-side" ref={list}>

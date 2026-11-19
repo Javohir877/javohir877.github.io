@@ -207,6 +207,23 @@ i, em { font-style: normal; }
 
 .stage { position: relative; height: min(720px, 82vh); }
 /* bosh sahifadagi kvant qandili */
+.stage-ph {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(36%, 220px);
+  transform: translate(-50%, -50%);
+  fill: none;
+  stroke: rgba(224, 169, 72, 0.55);
+  stroke-width: 1.4;
+  animation: ph-pulse 1.4s ease-in-out infinite;
+  transition: opacity 0.8s;
+  pointer-events: none;
+}
+.stage:has(.q-gl.ready) .stage-ph { opacity: 0; animation: none; }
+.stage:has(.no-gl) .stage-ph { opacity: 1; animation: none; }
+@keyframes ph-pulse { 50% { opacity: 0.35; } }
+
 .hero-gl { bottom: 84px; }
 .q-temp { margin-right: 6px; font: 13px var(--mono); color: var(--blue); }
 .stage-links { margin-top: 6px; pointer-events: auto; font-size: 15px; }
@@ -530,8 +547,14 @@ main { overflow-x: clip; }
 .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
 .rv.in { opacity: 1; transform: none; }
 
+/* sarlavhalar so'zma-so'z pastdan chiqadi */
+.split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.split .w > span { display: inline-block; transform: translateY(108%); transition: transform 0.9s var(--ease) calc(var(--i) * 80ms + 0.1s); }
+.in .split .w > span, .split.in .w > span { transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .rv { opacity: 1; transform: none; }
+  .split .w > span { transform: none; transition: none; }
   .flip-in, .card-in { transition: none; }
 }
 

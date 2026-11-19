@@ -139,11 +139,11 @@ function buildCryostat() {
   return { root, plates, chipMat, qubits, can, canMat, pick };
 }
 
-export default function QuantumScene({ active, closed, onPick, onToggle, bots = [], hero = false }) {
+export default function QuantumScene({ active, closed, onPick, onToggle, onReady, bots = [], hero = false }) {
   const wrap = useRef(null);
   const canvasRef = useRef(null);
-  const props = useRef({ active, closed, onPick, onToggle });
-  props.current = { active, closed, onPick, onToggle };
+  const props = useRef({ active, closed, onPick, onToggle, onReady });
+  props.current = { active, closed, onPick, onToggle, onReady };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -243,6 +243,9 @@ export default function QuantumScene({ active, closed, onPick, onToggle, bots = 
       else if (typeof h === "number") props.current.onPick?.(h);
     };
     const leave = () => { hover = -1; };
+    // telefonda barmoq sahifani aylantirsa, brauzer pointercancel yuboradi — sudrash shu yerda tugaydi
+    const cancel = () => { dragging = false; };
+    canvas.addEventListener("pointercancel", cancel);
     canvas.addEventListener("pointerdown", down);
     canvas.addEventListener("pointermove", move);
     canvas.addEventListener("pointerup", up);
@@ -267,6 +270,16 @@ export default function QuantumScene({ active, closed, onPick, onToggle, bots = 
     const vis = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
     vis.observe(stage);
 
+    // bosh sahifada sahifa pastga surilgan sari qandil burilib, biroz egiladi
+    let scrollT = 0;
+    const onScroll = () => { scrollT = Math.min(1, scrollY / innerHeight); };
+    if (hero) { addEventListener("scroll", onScroll, { passive: true }); onScroll(); }
+
+    // "sovutish" intro'si: sovuq to'lqini tepadagi diskdan chipgacha tushadi, oxirida kubitlar yonadi
+    const INTRO = hero && !reduced ? 2.6 : 0;
+    const ease = (x) => 1 - Math.pow(1 - x, 3);
+    let spinShown = 0, tiltShown = 0;
+
     const clock = new THREE.Clock();
     const k = reduced ? 0 : 1;
     let raf;
@@ -277,19 +290,32 @@ export default function QuantumScene({ active, closed, onPick, onToggle, bots = 
       const { active, closed } = props.current;
 
       if (!dragging) { spinVel *= 0.94; spin += spinVel; }
-      root.rotation.y = t * 0.12 * k + spin;
-      root.position.y = Math.sin(t * 0.9) * 0.025 * k;
+      const ip = INTRO ? Math.min(1, t / INTRO) : 1;
+      const ie = ease(ip);
+      spinShown += (scrollT * 1.4 - spinShown) * 0.08;
+      tiltShown += (scrollT * 0.3 - tiltShown) * 0.08;
+      root.rotation.y = t * 0.12 * k + spin + spinShown - (1 - ie) * 1.8;
+      root.rotation.x = tiltShown;
+      root.position.y = Math.sin(t * 0.9) * 0.025 * k + (1 - ie) * 0.35;
+      root.scale.setScalar(0.86 + 0.14 * ie);
+
+      // sovuq to'lqini: intro paytida har bir disk navbat bilan ko'k yonib o'tadi
+      const wave = (i) => (ip < 1 ? Math.exp(-Math.pow(ip * 6.6 - i - 0.6, 2) * 1.4) * 0.5 : 0);
+      const intro = ip < 1;
 
       // tanlangan bosqich och ko'k bilan yonadi
       plates.forEach((p, i) => {
-        const want = !closed && i === active ? 0.14 : 0;
-        p.mat.emissiveIntensity += (want - p.mat.emissiveIntensity) * 0.12;
+        const want = intro ? wave(i) : !closed && i === active ? 0.14 : 0;
+        p.mat.emissiveIntensity += (want - p.mat.emissiveIntensity) * (intro ? 0.3 : 0.12);
       });
-      const chipOn = !closed && active === 5;
-      chipMat.emissiveIntensity += ((chipOn ? 0.14 : 0) - chipMat.emissiveIntensity) * 0.12;
+      const chipOn = !intro && !closed && active === 5;
+      const chipWant = intro ? wave(5) : chipOn ? 0.14 : 0;
+      chipMat.emissiveIntensity += (chipWant - chipMat.emissiveIntensity) * (intro ? 0.3 : 0.12);
+      // kubitlar sovish tugagandagina yonadi
+      const qOn = INTRO ? Math.min(1, Math.max(0, (ip - 0.8) / 0.2)) : 1;
       qubits.forEach((q, i) => {
         const pulse = 0.5 + 0.5 * Math.sin(t * 2.4 + i * 1.7) * (k || 0.3);
-        q.material.opacity = (chipOn ? 0.55 : 0.3) + pulse * (chipOn ? 0.45 : 0.35);
+        q.material.opacity = ((chipOn ? 0.55 : 0.3) + pulse * (chipOn ? 0.45 : 0.35)) * qOn;
       });
 
       // qopqoq: pastdan ko'tariladi va asta ko'rinadi
@@ -300,8 +326,11 @@ export default function QuantumScene({ active, closed, onPick, onToggle, bots = 
 
       coins.forEach((c, i) => {
         const a = c.userData.phase + t * 0.4 * k;
-        // tangalar qandil orqasida va yonlarida aylanadi — uni hech qachon to'smaydi
-        c.position.set(Math.cos(a) * 1.18, 0.3 + Math.sin(a * 2 + i) * 0.45, -Math.abs(Math.sin(a)) * 0.8);
+        // tangalar qandil orqasida va yonlarida aylanadi — uni hech qachon to'smaydi;
+        // intro'da markazdan chiqib, o'z orbitasiga yoyiladi
+        const R = 1.18 * (0.35 + 0.65 * ie);
+        c.position.set(Math.cos(a) * R, 0.3 + Math.sin(a * 2 + i) * 0.45 * ie, -Math.abs(Math.sin(a)) * 0.8);
+        c.scale.setScalar(0.4 + 0.6 * ie);
         c.lookAt(camera.position);
         c.rotateY(Math.sin(t * 1.3 + i) * 0.45 * k);
       });
@@ -310,6 +339,7 @@ export default function QuantumScene({ active, closed, onPick, onToggle, bots = 
     };
     frame();
     stage.classList.add("ready");
+    props.current.onReady?.(INTRO);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -319,6 +349,8 @@ export default function QuantumScene({ active, closed, onPick, onToggle, bots = 
       canvas.removeEventListener("pointermove", move);
       canvas.removeEventListener("pointerup", up);
       canvas.removeEventListener("pointerleave", leave);
+      canvas.removeEventListener("pointercancel", cancel);
+      removeEventListener("scroll", onScroll);
       scene.traverse((o) => {
         o.geometry?.dispose();
         [].concat(o.material || []).forEach((m) => { m.map?.dispose(); m.dispose(); });

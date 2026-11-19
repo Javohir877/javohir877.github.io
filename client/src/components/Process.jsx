@@ -1,6 +1,7 @@
 import { Tilt } from "./Works.jsx";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
+import SplitTitle from "./SplitTitle.jsx";
 
 // Ish jarayoni: to'rt bosqich va ular bilan bir vaqtda yuradigan kod oynasi
 export default function Process({ phase, html }) {
@@ -10,7 +11,7 @@ export default function Process({ phase, html }) {
   return (
     <section className="sec ai" id="jarayon">
       <div className="rv" ref={text}>
-        <h2 className="sec-title">{t.process.title}</h2>
+        <SplitTitle text={t.process.title} />
         <p className="sec-sub">{t.process.sub}</p>
         <ol className="steps">
           {t.process.steps.map(([title, desc], i) => (

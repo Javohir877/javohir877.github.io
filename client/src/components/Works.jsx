@@ -99,7 +99,9 @@ export default function Works({ sites, onOpen }) {
   const title = useReveal();
   return (
     <section className="sec" id="ishlar">
-      <h2 className="sec-title rv" ref={title}>{t.works.title}</h2>
+      <h2 className="sec-title split rv" ref={title}>
+        {t.works.title.split(" ").map((w, i) => <span key={i} className="w" style={{ "--i": i }}><span>{w}</span></span>)}
+      </h2>
       <div className="works">
         {sites.map((s, i) => <WorkCard key={s.id} site={s} i={i} onOpen={onOpen} />)}
       </div>

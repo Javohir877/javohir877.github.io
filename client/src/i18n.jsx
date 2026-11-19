@@ -8,7 +8,8 @@ const DICT = {
   uz: {
     nav: { works: "Ishlar", bots: "Botlar", process: "Jarayon", quantum: "Kvant", github: "GitHub", contact: "Aloqa" },
     hero: {
-      eyebrow: "Sayt · Telegram bot · Android ilova",
+      eyebrow: "Sayt · Bot · Android va Windows ilova",
+      cooling: "sovutilmoqda…",
       // fe'llar alohida — ular navbat bilan yonadi
       parts: ["Men Javohirman. Sun'iy intellekt bilan birgalikda kod ", 0, ", uni ", 1, ", ", 2, " va ", 3, "."],
       verbs: ["yozaman", "tahrirlayman", "sayqallayman", "ishga tushiraman"],
@@ -72,7 +73,8 @@ const DICT = {
   ru: {
     nav: { works: "Работы", bots: "Боты", process: "Процесс", quantum: "Квант", github: "GitHub", contact: "Связь" },
     hero: {
-      eyebrow: "Сайт · Telegram-бот · Android-приложение",
+      eyebrow: "Сайты · Боты · Приложения для Android и Windows",
+      cooling: "охлаждение…",
       parts: ["Я Жавохир. Вместе с искусственным интеллектом я ", 0, " код, ", 1, ", ", 2, " и ", 3, " его."],
       verbs: ["пишу", "правлю", "шлифую", "запускаю"],
       cta: "Смотреть работы",
@@ -135,7 +137,8 @@ const DICT = {
   en: {
     nav: { works: "Work", bots: "Bots", process: "Process", quantum: "Quantum", github: "GitHub", contact: "Contact" },
     hero: {
-      eyebrow: "Websites · Telegram bots · Android apps",
+      eyebrow: "Websites · Bots · Android and Windows apps",
+      cooling: "cooling down…",
       parts: ["I'm Javohir. Together with AI I ", 0, " code, ", 1, " it, ", 2, " it and ", 3, " it."],
       verbs: ["write", "edit", "polish", "ship"],
       cta: "See my work",

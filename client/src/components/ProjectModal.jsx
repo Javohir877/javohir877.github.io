@@ -29,6 +29,15 @@ export default function ProjectModal({ sites, index, onClose, onNav }) {
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
+      // Tab oynadan tashqariga chiqib ketmaydi
+      if (e.key === "Tab") {
+        const f = [...document.querySelectorAll(".pm a[href], .pm button")].filter((el) => el.offsetParent);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        else if (!e.target.closest?.(".pm")) { e.preventDefault(); first.focus(); }
+      }
       if (e.key === "ArrowRight") onNav(1);
       if (e.key === "ArrowLeft") onNav(-1);
     };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
+import SplitTitle from "./SplitTitle.jsx";
 
 function FlipCard({ bot, i }) {
   const { t, pick } = useLang();
@@ -41,7 +42,7 @@ export default function Bots({ bots }) {
   return (
     <section className="sec" id="botlar">
       <div className="rv" ref={head}>
-        <h2 className="sec-title">{t.bots.title}</h2>
+        <SplitTitle text={t.bots.title} />
         <p className="sec-sub">{t.bots.sub}</p>
       </div>
       <div className="bots">
