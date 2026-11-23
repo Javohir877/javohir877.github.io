@@ -12,7 +12,8 @@ export default function Hero({ phase, bots }) {
   const [active, setActive] = useState(4);
   const [closed, setClosed] = useState(false);
   const touched = useRef(0);
-  const [cool, setCool] = useState(null); // intro paytidagi harorat (K), tugagach null
+  const [cool, setCool] = useState(null);
+  const [bot, setBot] = useState(null); // ustiga borilgan bot tangasi: { name, x, y } // intro paytidagi harorat (K), tugagach null
   const cls = (i) => (i === phase ? "on" : i < phase ? "done" : "");
 
   // hech kim tegmasa, qandilning bosqichlari navbat bilan yonadi
@@ -67,8 +68,9 @@ export default function Hero({ phase, bots }) {
           <rect x="70" y="152" width="20" height="16" rx="3" />
         </svg>
         <Suspense fallback={null}>
-          <QuantumScene hero bots={bots} active={active} closed={closed} onPick={pick} onToggle={toggle} onReady={onReady} />
+          <QuantumScene hero bots={bots} active={active} closed={closed} onPick={pick} onToggle={toggle} onReady={onReady} onBot={setBot} />
         </Suspense>
+        {bot && <span className="bot-tip" style={{ left: bot.x, top: bot.y }}>{bot.name} ↗</span>}
         <div className="stage-ui">
           <p className="screen-name" aria-live="polite">
             {cool !== null

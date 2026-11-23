@@ -6,6 +6,14 @@ import Backdrop from "./components/Backdrop.jsx";
 import Quantum from "./components/Quantum.jsx";
 import "./styles.css";
 
+// gradient variantini sinash uchun: ?rang=sovish | shafaq | sadaf | olov (sessiya davomida eslab qolinadi)
+try {
+  const q = new URLSearchParams(location.search).get("rang");
+  if (q !== null) sessionStorage.setItem("rang", q);
+  const r = sessionStorage.getItem("rang");
+  if (["sovish", "shafaq", "sadaf", "olov"].includes(r)) document.documentElement.dataset.palette = r;
+} catch {}
+
 function KvantPage() {
   const { t, lang, setLang } = useLang();
   return (

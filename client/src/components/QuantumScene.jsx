@@ -5,8 +5,13 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
-const ACCENT = 0x8cc8ff;
-const GOLD = 0xe0a948;
+// ranglar sayt mavzusidan olinadi (--blue va --metal), topilmasa — standart qiymatlar
+const cssColor = (name, fallback) => {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return v ? new THREE.Color(v).getHex() : fallback;
+};
+const ACCENT = cssColor("--blue", 0x8cc8ff);
+const GOLD = cssColor("--metal", 0xe0a948);
 const COPPER = 0xc8743c;
 
 // disklar: [radius, y]
@@ -139,11 +144,11 @@ function buildCryostat() {
   return { root, plates, chipMat, qubits, can, canMat, pick };
 }
 
-export default function QuantumScene({ active, closed, onPick, onToggle, onReady, bots = [], hero = false }) {
+export default function QuantumScene({ active, closed, onPick, onToggle, onReady, onBot, bots = [], hero = false }) {
   const wrap = useRef(null);
   const canvasRef = useRef(null);
-  const props = useRef({ active, closed, onPick, onToggle, onReady });
-  props.current = { active, closed, onPick, onToggle, onReady };
+  const props = useRef({ active, closed, onPick, onToggle, onReady, onBot });
+  props.current = { active, closed, onPick, onToggle, onReady, onBot };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -194,14 +199,29 @@ export default function QuantumScene({ active, closed, onPick, onToggle, onReady
       backFace.rotation.y = Math.PI;
       backFace.position.z = -face.position.z;
       coin.add(edge, face, backFace);
-      coin.userData = { url: b.url, phase: (i / linked.length) * Math.PI * 2 };
+      coin.userData = { url: b.url, name: b.name, phase: (i / linked.length) * Math.PI * 2, coin };
       coin.children.forEach((m) => (m.userData = coin.userData));
       scene.add(coin);
       return coin;
     });
 
     /* boshqaruv */
-    let spin = 0, spinVel = 0, dragging = false, dragX = 0, moved = 0, hover = -1, capP = 0;
+    let spin = 0, spinVel = 0, dragging = false, dragX = 0, moved = 0, hover = -1, capP = 0, hoverCoin = null;
+
+    // sovuq zarralar: qandil atrofida sekin pastga tushadigan mayda nuqtalar
+    const N = coarse ? 140 : 260;
+    const pos = new Float32Array(N * 3);
+    const seed = new Float32Array(N * 2);
+    for (let i = 0; i < N; i++) {
+      seed[i * 2] = Math.random() * Math.PI * 2;
+      seed[i * 2 + 1] = 0.25 + Math.random() * 0.75;
+      pos[i * 3 + 1] = -1.1 + Math.random() * 2.7;
+    }
+    const frostGeo = new THREE.BufferGeometry();
+    frostGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    const frostMat = new THREE.PointsMaterial({ color: ACCENT, size: 0.012, transparent: true, opacity: 0, depthWrite: false, toneMapped: false });
+    const frost = new THREE.Points(frostGeo, frostMat);
+    scene.add(frost);
     const ray = new THREE.Raycaster();
     const ndc = new THREE.Vector2();
     const hit = (e) => {
@@ -209,7 +229,7 @@ export default function QuantumScene({ active, closed, onPick, onToggle, onReady
       ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
       ray.setFromCamera(ndc, camera);
       const c = coins.length ? ray.intersectObjects(coins, true)[0] : null;
-      if (c) return { url: c.object.userData.url };
+      if (c) return { url: c.object.userData.url, name: c.object.userData.name, coin: c.object.userData.coin };
       if (props.current.closed) return ray.intersectObject(can, true)[0] ? "can" : null;
       const h = ray.intersectObjects(pick, false)[0];
       return h ? h.object.userData.stage : null;
@@ -228,6 +248,10 @@ export default function QuantumScene({ active, closed, onPick, onToggle, onReady
       if (e.pointerType !== "mouse") return;
       const h = hit(e);
       canvas.style.cursor = h !== null ? "pointer" : "grab";
+      // tanga ustida — bot nomi sichqoncha yonida chiqadi
+      const r = canvas.getBoundingClientRect();
+      hoverCoin = h?.coin || null;
+      props.current.onBot?.(h?.name ? { name: h.name, x: e.clientX - r.left, y: e.clientY - r.top } : null);
       const s = typeof h === "number" ? h : -1;
       if (s !== hover) {
         hover = s;
@@ -242,7 +266,7 @@ export default function QuantumScene({ active, closed, onPick, onToggle, onReady
       else if (h === "can") props.current.onToggle?.();
       else if (typeof h === "number") props.current.onPick?.(h);
     };
-    const leave = () => { hover = -1; };
+    const leave = () => { hover = -1; hoverCoin = null; props.current.onBot?.(null); };
     // telefonda barmoq sahifani aylantirsa, brauzer pointercancel yuboradi — sudrash shu yerda tugaydi
     const cancel = () => { dragging = false; };
     canvas.addEventListener("pointercancel", cancel);
@@ -324,13 +348,29 @@ export default function QuantumScene({ active, closed, onPick, onToggle, onReady
       can.position.y = can.userData.top - (1 - capP) * 2.6;
       canMat.opacity = Math.min(1, capP * 1.4);
 
+      // zarralar: spiral bo'ylab pastga, tagiga yetganda tepaga qaytadi
+      for (let i = 0; i < N; i++) {
+        const a = seed[i * 2] + t * 0.08 * seed[i * 2 + 1] * k;
+        const rr = 0.3 + seed[i * 2 + 1] * 0.75;
+        let y = pos[i * 3 + 1] - 0.0016 * seed[i * 2 + 1] * k;
+        if (y < -1.1) y = 1.6;
+        pos[i * 3] = Math.cos(a) * rr;
+        pos[i * 3 + 1] = y;
+        pos[i * 3 + 2] = Math.sin(a) * rr;
+      }
+      frostGeo.attributes.position.needsUpdate = true;
+      frost.rotation.y = root.rotation.y * 0.3;
+      frostMat.opacity += ((closed ? 0.15 : 0.55 * ie) - frostMat.opacity) * 0.05;
+
       coins.forEach((c, i) => {
         const a = c.userData.phase + t * 0.4 * k;
         // tangalar qandil orqasida va yonlarida aylanadi — uni hech qachon to'smaydi;
         // intro'da markazdan chiqib, o'z orbitasiga yoyiladi
         const R = 1.18 * (0.35 + 0.65 * ie);
         c.position.set(Math.cos(a) * R, 0.3 + Math.sin(a * 2 + i) * 0.45 * ie, -Math.abs(Math.sin(a)) * 0.8);
-        c.scale.setScalar(0.4 + 0.6 * ie);
+        // ustiga borilgan tanga biroz kattalashadi
+        c.userData.s = (c.userData.s || 1) + ((c === hoverCoin ? 1.25 : 1) - (c.userData.s || 1)) * 0.15;
+        c.scale.setScalar((0.4 + 0.6 * ie) * c.userData.s);
         c.lookAt(camera.position);
         c.rotateY(Math.sin(t * 1.3 + i) * 0.45 * k);
       });

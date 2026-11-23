@@ -5,6 +5,7 @@
 export const SITES = [
   {
     id: "opus",
+    platforms: ["web", "android"],
     repo: "https://github.com/Javohir877/OPUS-MARKET",
     about: {
       uz: "Noutbuk va aksessuarlar do'koni. Katalog, akkauntlar, buyurtmalar va rasmlar Cloudflare D1 bazasida — admin panelda narxni o'zgartirsangiz sayt shu zahoti yangilanadi. Buyurtma Telegram bot yuborgan 6 xonali kod bilan tasdiqlanadi, bot ichidagi Mini App esa parolsiz kiritadi. Android ilova — alohida mobil interfeys: stories, filtrlar, kompyuter yig'ish (soket, xotira va blok quvvatini tekshiradi) va buyurtma holatini ko'rsatadigan vidjet.",
@@ -25,6 +26,7 @@ export const SITES = [
   },
   {
     id: "navo",
+    platforms: ["windows", "android"],
     repo: "https://github.com/Javohir877/navo",
     exe: "https://github.com/Javohir877/navo/releases/latest/download/Navo-Setup.exe",
     apk: "https://github.com/Javohir877/navo/releases/latest/download/Navo.apk",
@@ -47,6 +49,7 @@ export const SITES = [
   },
   {
     id: "olov",
+    platforms: ["web"],
     repo: "https://github.com/Javohir877/OLOV-FOOD",
     about: {
       uz: "Burger va lavash yetkazib berish sayti. Bosh sahifadagi burger tirik: sichqonchaga qaraydi, ko'z qisadi, bossangiz sakraydi. Kombo yig'ish, promokodlar, omad g'ildiragi va 5% keshbek bor. Har buyurtma @olovfoodbot orqali egasiga keladi, admin holatni o'zgartirsa bot mijozga o'zi yozadi. Telefonga ilova sifatida o'rnatiladi.",
@@ -65,6 +68,7 @@ export const SITES = [
   },
   {
     id: "hojiakbar",
+    platforms: ["web"],
     repo: "https://github.com/Javohir877/byhojiakbar-portfolio",
     about: {
       uz: "Video montajchi uchun portfolio: futbol editlar, Reels va Shorts. O'zimiz yozgan video pleyer va ariza formasi bor — ariza to'g'ri Telegramga tushadi. Videolar ffmpeg bilan siqilgan, shuning uchun sayt telefonda ham tez ochiladi.",
@@ -83,6 +87,7 @@ export const SITES = [
   },
   {
     id: "hisobla",
+    platforms: ["web", "android"],
     repo: "https://github.com/Javohir877/hisobla",
     apk: "https://github.com/Javohir877/hisobla/releases/latest/download/hisobla.apk",
     about: {
@@ -104,6 +109,7 @@ export const SITES = [
   },
   {
     id: "startap",
+    platforms: ["web"],
     repo: "https://github.com/Javohir877/startap-sayohati",
     about: {
       uz: "Sinf uchun interaktiv ta'lim o'yini: uch guruh startap jamoasiga aylanib Pre-seed → Seed → Series A, B, C → Exit bosqichlaridan o'tadi. Har bosqichda strategik qaror, tasodif kartasi, investor taklifi va 30 soniyalik bilim savoli bor. Maqsad — eng foydali exit va eng bilimdon guruh bo'lish.",

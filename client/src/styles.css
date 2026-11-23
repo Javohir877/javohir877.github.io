@@ -9,6 +9,8 @@
   --hot: #ff5b2e;
   --blue: #8cc8ff;
   --blue-ink: #07131f;
+  --verb: #5d616c;
+  --metal: #e0a948;
   --sans: "Onest", system-ui, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -17,6 +19,28 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+/* gradient variantlarini sinash: ?rang=sovish | shafaq | sadaf | olov (main.jsx o'rnatadi) */
+:root[data-palette="sovish"] { --g1: #f0b860; --g2: #8cc8ff; --g3: #8cc8ff; --blue: #8cc8ff; --hot: #f0b860; }
+:root[data-palette="shafaq"] { --g1: #5ee7ff; --g2: #9b8bff; --g3: #9b8bff; --blue: #7fdcff; --hot: #9b8bff; }
+:root[data-palette="sadaf"]  { --g1: #8cc8ff; --g2: #c9a7ff; --g3: #ffb48a; --blue: #a9c8ff; --hot: #ffb48a; }
+:root[data-palette="olov"]   { --g1: #ffa057; --g2: #ff4f9a; --g3: #ff4f9a; --blue: #ff8f6b; --hot: #ff4f9a; }
+:root[data-palette] { --grad: linear-gradient(90deg, var(--g1), var(--g2), var(--g3)); }
+:root[data-palette] .hero em.on { background-image: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:root[data-palette] .hero em::after { background: var(--grad); }
+:root[data-palette] .btn { background: var(--grad); color: #0a0b10; }
+:root[data-palette] .contact h2 em { background-image: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:root[data-palette] .w-filter button.on { background: var(--grad); color: #0a0b10; }
+:root[data-palette] .stage::before {
+  content: "";
+  position: absolute;
+  inset: 12% 14% 26%;
+  border-radius: 50%;
+  background: var(--grad);
+  opacity: 0.16;
+  filter: blur(70px);
+  pointer-events: none;
+}
 
 html { background: var(--bg); }
 
@@ -181,7 +205,7 @@ i, em { font-style: normal; }
   position: relative;
   font: italic 500 1.2em/1 var(--serif);
   letter-spacing: -0.005em;
-  color: #5d616c;
+  color: var(--verb);
   transition: color 0.5s;
 }
 
@@ -206,6 +230,23 @@ i, em { font-style: normal; }
 .hero-links { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
 
 .stage { position: relative; height: min(720px, 82vh); }
+/* ishlar: sarlavha, hisoblagichlar va filtr */
+.works-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 12px 30px; }
+.works-head .sec-title { grid-column: 1; }
+.w-stats { grid-column: 1; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 6px 0 0; font: 14px var(--mono); color: var(--dim); }
+.w-stats b { margin-right: 4px; color: var(--fg); font-weight: 500; font-size: 18px; }
+.w-filter { grid-column: 2; grid-row: 1 / 3; align-self: end; display: flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
+.w-filter button { padding: 8px 14px; border: 0; border-radius: 999px; background: none; color: var(--dim); font: 500 14px var(--sans); cursor: pointer; transition: color 0.3s, background 0.3s; }
+.w-filter button:hover { color: var(--fg); }
+.w-filter button.on { background: var(--fg); color: var(--bg); }
+.w-filter i { font: 12px var(--mono); font-style: normal; opacity: 0.6; }
+
+/* kartadagi skrinshot ko'rinishga kirganda kichik ramkadan to'liq ochiladi */
+.works .rv .c-img { clip-path: inset(9% 9% 9% 9% round 18px); transition: clip-path 1.2s var(--ease) 0.15s; }
+.works .rv.in .c-img { clip-path: inset(0 0 0 0 round 0); }
+.works .rv .c-phone { opacity: 0; translate: 0 30px; transition: opacity 0.8s var(--ease) 0.55s, translate 0.8s var(--ease) 0.55s; }
+.works .rv.in .c-phone { opacity: 1; translate: 0 0; }
+
 /* bosh sahifadagi kvant qandili */
 .stage-ph {
   position: absolute;
@@ -226,6 +267,21 @@ i, em { font-style: normal; }
 
 .hero-gl { bottom: 84px; }
 .q-temp { margin-right: 6px; font: 13px var(--mono); color: var(--blue); }
+.bot-tip {
+  position: absolute;
+  z-index: 2;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--fg);
+  font: 500 13px var(--sans);
+  white-space: nowrap;
+  transform: translate(14px, -130%);
+  pointer-events: none;
+  animation: tip-in 0.25s var(--ease);
+}
+@keyframes tip-in { from { opacity: 0; transform: translate(14px, -100%); } }
 .stage-links { margin-top: 6px; pointer-events: auto; font-size: 15px; }
 
 .stage-ui { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; pointer-events: none; }
@@ -304,7 +360,7 @@ main { overflow-x: clip; }
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
 }
 
-.card:hover .card-in { border-color: rgba(140, 200, 255, 0.3); box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.95); }
+.card:hover .card-in { border-color: color-mix(in srgb, var(--blue) 30%, transparent); box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.95); }
 
 .c-img {
   width: 100%;
@@ -398,7 +454,7 @@ main { overflow-x: clip; }
 .platform.discord { background: rgba(88, 101, 242, 0.18); color: #9aa3ff !important; }
 .face span { font: 13px var(--mono); color: var(--dim); }
 
-.back { transform: rotateY(180deg); background: var(--card2); border-color: rgba(140, 200, 255, 0.3); gap: 18px; }
+.back { transform: rotateY(180deg); background: var(--card2); border-color: color-mix(in srgb, var(--blue) 30%, transparent); gap: 18px; }
 .back p { color: #c5c7ce; font-size: 15px; }
 
 /* sun'iy intellekt */
@@ -479,9 +535,9 @@ main { overflow-x: clip; }
 
 .heat-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 1fr); gap: 5px; }
 .heat-grid i, .hl i { display: block; aspect-ratio: 1; border-radius: 4px; background: rgba(238, 234, 226, 0.07); }
-.heat i.l1, .hl i.l1 { background: rgba(140, 200, 255, 0.3); }
-.heat i.l2, .hl i.l2 { background: rgba(140, 200, 255, 0.55); }
-.heat i.l3, .hl i.l3 { background: rgba(140, 200, 255, 0.8); }
+.heat i.l1, .hl i.l1 { background: color-mix(in srgb, var(--blue) 30%, transparent); }
+.heat i.l2, .hl i.l2 { background: color-mix(in srgb, var(--blue) 55%, transparent); }
+.heat i.l3, .hl i.l3 { background: color-mix(in srgb, var(--blue) 80%, transparent); }
 .heat i.l4, .hl i.l4 { background: var(--blue); }
 .heat-legend { display: flex; justify-content: space-between; margin-top: 12px; font: 12px var(--mono); color: var(--dim); }
 .hl { display: flex; align-items: center; gap: 4px; }
@@ -504,7 +560,7 @@ main { overflow-x: clip; }
   text-decoration: none;
   transition: border-color 0.3s, transform 0.3s var(--ease);
 }
-.gh-repos a:hover { border-color: rgba(140, 200, 255, 0.35); transform: translateY(-3px); }
+.gh-repos a:hover { border-color: color-mix(in srgb, var(--blue) 35%, transparent); transform: translateY(-3px); }
 .gh-repos b { font: 600 15px var(--mono); }
 .gh-repos p { flex: 1; color: var(--dim); font-size: 14px; line-height: 1.45; }
 .gh-repos .meta { display: flex; align-items: center; gap: 6px; font: 12px var(--mono); color: var(--dim); }
@@ -554,6 +610,8 @@ main { overflow-x: clip; }
 
 @media (prefers-reduced-motion: reduce) {
   .rv { opacity: 1; transform: none; }
+  .works .rv .c-img { clip-path: none; transition: none; }
+  .works .rv .c-phone { opacity: 1; translate: none; transition: none; }
   .split .w > span { transform: none; transition: none; }
   .flip-in, .card-in { transition: none; }
 }
@@ -617,7 +675,7 @@ main { overflow-x: clip; }
   transition: border-color 0.2s, background 0.2s;
 }
 
-.pm-nav button:hover { border-color: rgba(140, 200, 255, 0.4); background: #1f232b; }
+.pm-nav button:hover { border-color: color-mix(in srgb, var(--blue) 40%, transparent); background: #1f232b; }
 
 .pm-body { display: grid; grid-template-columns: 1.55fr 1fr; gap: 28px; padding: 24px; }
 
@@ -837,6 +895,9 @@ kbd {
   .sec-sub { font-size: 17px; }
 
   .works { grid-template-columns: 1fr; gap: 16px; margin-top: 30px; }
+  .works-head { grid-template-columns: 1fr; }
+  .w-filter { grid-column: 1; grid-row: auto; justify-self: start; }
+  .w-filter button { padding: 7px 12px; font-size: 13px; }
   .card .card-in { padding: 0; }
   .c-img { border-radius: 22px 22px 0 0; transform: translateZ(18px); }
   .c-text { position: static; max-width: none; border-radius: 0 0 22px 22px; border: 0; transform: translateZ(34px); background: var(--card2); }

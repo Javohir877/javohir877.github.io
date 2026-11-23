@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
 
@@ -94,16 +94,63 @@ function WorkCard({ site, i, onOpen }) {
   );
 }
 
-export default function Works({ sites, onOpen }) {
+// raqam ko'ringanda 0 dan sanab chiqadi
+function Count({ to }) {
+  const ref = useRef(null);
+  const [n, setN] = useState(reduced ? to : 0);
+  useEffect(() => {
+    if (reduced) return setN(to);
+    const el = ref.current;
+    let raf;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / 1100);
+        setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+  }, [to]);
+  return <b ref={ref}>{String(n).padStart(2, "0")}</b>;
+}
+
+const FILTERS = [
+  () => true,
+  (s) => s.platforms?.includes("web"),
+  (s) => s.platforms?.some((p) => p === "android" || p === "windows"),
+];
+
+export default function Works({ sites, bots = [], onOpen }) {
   const { t } = useLang();
   const title = useReveal();
+  const [f, setF] = useState(0);
+  const platforms = new Set(sites.flatMap((s) => s.platforms || []));
+  const stats = [sites.length, bots.length, platforms.size];
   return (
     <section className="sec" id="ishlar">
-      <h2 className="sec-title split rv" ref={title}>
-        {t.works.title.split(" ").map((w, i) => <span key={i} className="w" style={{ "--i": i }}><span>{w}</span></span>)}
-      </h2>
-      <div className="works">
-        {sites.map((s, i) => <WorkCard key={s.id} site={s} i={i} onOpen={onOpen} />)}
+      <div className="works-head">
+        <h2 className="sec-title split rv" ref={title}>
+          {t.works.title.split(" ").map((w, i) => <span key={i} className="w" style={{ "--i": i }}><span>{w}</span></span>)}
+        </h2>
+        <p className="w-stats">
+          {stats.map((n, i) => <span key={i}><Count to={n} /> {t.works.stats[i][0]}</span>)}
+        </p>
+        <div className="w-filter" role="group" aria-label={t.works.filterLabel}>
+          {t.works.filters.map((label, i) => (
+            <button key={i} className={f === i ? "on" : ""} aria-pressed={f === i} onClick={() => setF(i)}>
+              {label} <i>{sites.filter(FILTERS[i]).length}</i>
+            </button>
+          ))}
+        </div>
+      </div>
+      {/* filtr almashganda kartalar qaytadan, navbat bilan paydo bo'ladi */}
+      <div className="works" key={f}>
+        {sites.map((s, i) => FILTERS[f](s) && <WorkCard key={s.id} site={s} i={i} onOpen={onOpen} />)}
       </div>
     </section>
   );

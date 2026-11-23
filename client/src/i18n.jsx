@@ -20,7 +20,9 @@ const DICT = {
       scroll: "pastga",
       screens: "Ekranlar",
     },
-    works: { title: "Ishlar", site: "Saytni ko'rish ↗", details: "Batafsil →", open: "Saytni ochish ↗", code: "Kodni ko'rish ↗", exe: "Windows (EXE) ↓", apk: "Android ilova (APK) ↓", close: "Yopish", prev: "Oldingi", next: "Keyingi", desktop: "Kompyuterda", mobile: "Telefonda" },
+    works: { title: "Ishlar", site: "Saytni ko'rish ↗", details: "Batafsil →", open: "Saytni ochish ↗", code: "Kodni ko'rish ↗", exe: "Windows (EXE) ↓", apk: "Android ilova (APK) ↓", close: "Yopish", prev: "Oldingi", next: "Keyingi", desktop: "Kompyuterda", mobile: "Telefonda",
+      filters: ["Hammasi", "Saytlar", "Ilovalar"], filterLabel: "Ishlarni saralash",
+      stats: [["loyiha"], ["bot"], ["platforma"]] },
     bots: { title: "Botlar", sub: "Telegram va Discord uchun. Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
     process: {
       title: "Sun'iy intellekt bilan ishlayman",
@@ -84,7 +86,9 @@ const DICT = {
       scroll: "вниз",
       screens: "Экраны",
     },
-    works: { title: "Работы", site: "Открыть сайт ↗", details: "Подробнее →", open: "Открыть сайт ↗", code: "Смотреть код ↗", exe: "Windows (EXE) ↓", apk: "Android-приложение (APK) ↓", close: "Закрыть", prev: "Назад", next: "Далее", desktop: "На компьютере", mobile: "На телефоне" },
+    works: { title: "Работы", site: "Открыть сайт ↗", details: "Подробнее →", open: "Открыть сайт ↗", code: "Смотреть код ↗", exe: "Windows (EXE) ↓", apk: "Android-приложение (APK) ↓", close: "Закрыть", prev: "Назад", next: "Далее", desktop: "На компьютере", mobile: "На телефоне",
+      filters: ["Все", "Сайты", "Приложения"], filterLabel: "Фильтр работ",
+      stats: [["проектов"], ["ботов"], ["платформы"]] },
     bots: { title: "Боты", sub: "Для Telegram и Discord. Нажмите на карточку или наведите курсор — откроется обратная сторона.", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
     process: {
       title: "Работаю с искусственным интеллектом",
@@ -148,7 +152,9 @@ const DICT = {
       scroll: "scroll",
       screens: "Screens",
     },
-    works: { title: "Work", site: "Open the site ↗", details: "Details →", open: "Open the site ↗", code: "View code ↗", exe: "Windows (EXE) ↓", apk: "Android app (APK) ↓", close: "Close", prev: "Previous", next: "Next", desktop: "Desktop", mobile: "Mobile" },
+    works: { title: "Work", site: "Open the site ↗", details: "Details →", open: "Open the site ↗", code: "View code ↗", exe: "Windows (EXE) ↓", apk: "Android app (APK) ↓", close: "Close", prev: "Previous", next: "Next", desktop: "Desktop", mobile: "Mobile",
+      filters: ["All", "Websites", "Apps"], filterLabel: "Filter work",
+      stats: [["projects"], ["bots"], ["platforms"]] },
     bots: { title: "Bots", sub: "For Telegram and Discord. Tap a card or hover over it to flip it.", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
     process: {
       title: "I work with AI",

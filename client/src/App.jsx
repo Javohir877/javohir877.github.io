@@ -66,7 +66,7 @@ export default function App() {
       <Nav onSearch={() => setPalette(true)} />
       <Hero phase={editor.phase} bots={data.bots} />
       <main>
-        <Works sites={data.sites} onOpen={openProject} />
+        <Works sites={data.sites} bots={data.bots} onOpen={openProject} />
         <Bots bots={data.bots} />
         <Process phase={editor.phase} html={editor.html} />
         <GitHub sites={data.sites} />
