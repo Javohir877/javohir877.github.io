@@ -63,7 +63,7 @@ function WorkCard({ site, i, onOpen }) {
   const { t, pick } = useLang();
   const reveal = useReveal();
   return (
-    <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ transitionDelay: (i % 2) * 0.08 + "s" }}>
+    <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ transitionDelay: (i % 3) * 0.08 + "s" }}>
       {/* oddiy bosish — loyiha oynasi, g'ildirakcha / Ctrl bilan — saytning o'zi yangi tabda */}
       <Tilt
         as="a"
@@ -77,10 +77,12 @@ function WorkCard({ site, i, onOpen }) {
           onOpen(i);
         }}
       >
-        <img className="c-img" src={site.img} alt={site.name} width="1440" height="900" loading="lazy" />
-        {site.phone && (
-          <div className="c-phone"><img src={site.phone} alt="" width="780" height="1688" loading="lazy" /></div>
-        )}
+        <div className="c-shot">
+          <img className="c-img" src={site.img} alt={site.name} width="1440" height="900" loading="lazy" />
+          {site.phone && (
+            <div className="c-phone"><img src={site.phone} alt="" width="780" height="1688" loading="lazy" /></div>
+          )}
+        </div>
         <div className="c-text">
           <h3>{site.name}</h3>
           <p>{pick(site.text)}</p>

@@ -143,6 +143,12 @@ export const BOTS = [
       ru: "Подтверждает заказ 6-значным кодом. Кнопка меню открывает магазин прямо в Telegram.",
       en: "Confirms orders with a 6-digit code. The menu button opens the store inside Telegram.",
     },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "me", text: { uz: "/start", ru: "/start", en: "/start" } },
+      { from: "bot", text: { uz: "Assalomu alaykum! OPUS MARKET do'koniga xush kelibsiz.", ru: "Здравствуйте! Добро пожаловать в OPUS MARKET.", en: "Hi! Welcome to OPUS MARKET." }, buttons: [{ uz: "Do'konni ochish", ru: "Открыть магазин", en: "Open the store" }] },
+      { from: "bot", text: { uz: "Buyurtmani tasdiqlash kodi: 482 913", ru: "Код подтверждения заказа: 482 913", en: "Order confirmation code: 482 913" } },
+    ],
   },
   {
     user: "olovfoodbot",
@@ -155,6 +161,12 @@ export const BOTS = [
       ru: "Передаёт каждый заказ владельцу. Когда статус меняется, сам пишет клиенту.",
       en: "Delivers every order to the owner and messages the customer when the status changes.",
     },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "bot", text: { uz: "Buyurtmangiz qabul qilindi: #1042", ru: "Ваш заказ принят: #1042", en: "Your order is in: #1042" } },
+      { from: "bot", text: { uz: "Holat: tayyorlanmoqda", ru: "Статус: готовится", en: "Status: being prepared" } },
+      { from: "bot", text: { uz: "Holat: yo'lda — kuryer 15 daqiqada yetib boradi", ru: "Статус: в пути — курьер будет через 15 минут", en: "Status: on the way — courier arrives in 15 minutes" } },
+    ],
   },
   {
     user: "swipeslidebot",
@@ -167,6 +179,13 @@ export const BOTS = [
       ru: "Для студентов: рефераты, курсовые, презентации, Excel и PDF ↔ Word. На 4 языках.",
       en: "For students: essays, coursework, slides, Excel and PDF ↔ Word. In 4 languages.",
     },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "me", text: { uz: "/start", ru: "/start", en: "/start" } },
+      { from: "bot", text: { uz: "Nima tayyorlaymiz?", ru: "Что подготовим?", en: "What shall we make?" }, buttons: [{ uz: "Referat", ru: "Реферат", en: "Essay" }, { uz: "Taqdimot", ru: "Презентация", en: "Slides" }, { uz: "PDF ↔ Word", ru: "PDF ↔ Word", en: "PDF ↔ Word" }] },
+      { from: "me", text: { uz: "Taqdimot", ru: "Презентация", en: "Slides" } },
+      { from: "bot", text: { uz: "Mavzuni yozing — slaydlarni tayyorlab beraman.", ru: "Напишите тему — подготовлю слайды.", en: "Send the topic and I'll prepare the slides." } },
+    ],
   },
   {
     user: "dzteambot",
@@ -179,6 +198,13 @@ export const BOTS = [
       ru: "Официальный бот команды DELTA ZONE: заявки на вступление.",
       en: "Official DELTA ZONE team bot: applications to join.",
     },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "me", text: { uz: "/start", ru: "/start", en: "/start" } },
+      { from: "bot", text: { uz: "DELTA ZONE jamoasiga ariza. Ismingizni yozing.", ru: "Заявка в команду DELTA ZONE. Напишите своё имя.", en: "Application to DELTA ZONE. Send your name." } },
+      { from: "me", text: { uz: "Javohir", ru: "Жавохир", en: "Javohir" } },
+      { from: "bot", text: { uz: "Ariza yuborildi. Javobni shu yerda olasiz.", ru: "Заявка отправлена. Ответ придёт сюда.", en: "Application sent. You'll get the answer here." } },
+    ],
   },
   {
     user: "dzmafia",
@@ -193,6 +219,12 @@ export const BOTS = [
       ru: "Игра «Мафия» в Discord: Дон, Комиссар, Доктор, Любовница, Маньяк — ночь и день, команды /mafia.",
       en: "Mafia game on Discord: Don, Detective, Doctor, Lover, Killer — night and day phases, /mafia commands.",
     },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "me", text: { uz: "/mafia start", ru: "/mafia start", en: "/mafia start" } },
+      { from: "bot", text: { uz: "Tun tushdi. Rollar shaxsiy xabarda: Don, Komissar, Doktor, Ma'shuqa, Qotil.", ru: "Наступила ночь. Роли в личных сообщениях: Дон, Комиссар, Доктор, Любовница, Маньяк.", en: "Night falls. Roles sent by DM: Don, Detective, Doctor, Lover, Killer." } },
+      { from: "bot", text: { uz: "Kun boshlandi — ovoz berish uchun 60 soniya.", ru: "Наступил день — 60 секунд на голосование.", en: "Day breaks — 60 seconds to vote." } },
+    ],
   },
   {
     user: "dzmusic",
@@ -205,6 +237,11 @@ export const BOTS = [
       ru: "Музыкальный бот команды DELTA ZONE: добавьте в голосовой канал и слушайте вместе.",
       en: "DELTA ZONE's music bot: add it to a voice channel and listen together.",
     },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "me", text: { uz: "/play", ru: "/play", en: "/play" } },
+      { from: "bot", text: { uz: "Ovozli kanalga qo'shildim. Navbatdagi qo'shiq ijro etilmoqda.", ru: "Подключился к голосовому каналу. Играет следующий трек.", en: "Joined the voice channel. Now playing the next track." } },
+    ],
   },
 ];
 

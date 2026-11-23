@@ -880,6 +880,92 @@ kbd {
 .q-page .q-stage { height: min(780px, 86vh); }
 .q-foot { justify-content: center; gap: 28px; }
 
+/* ---------- ixcham ishlar: 3 ustun, matn rasm ostida ---------- */
+.works { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 34px; }
+.works .wide { grid-column: auto; }
+.works .card .card-in { padding: 0; overflow: visible; display: flex; flex-direction: column; }
+.works .c-img { border-radius: 21px 21px 0 0; transform: translateZ(20px); aspect-ratio: 16 / 10; }
+.c-shot { position: relative; transform-style: preserve-3d; }
+.works .c-phone { top: auto; bottom: 12px; right: 14px; width: 22%; padding: 3px; border-radius: 16px; transform: translateZ(60px); }
+.works .c-phone img { border-radius: 13px; }
+.works .c-text { position: static; max-width: none; flex: 1; display: flex; flex-direction: column; padding: 16px 18px 18px; border: 0; border-top: 1px solid var(--line); border-radius: 0 0 21px 21px; background: none; backdrop-filter: none; transform: translateZ(30px); }
+.works .wide .c-text { max-width: none; }
+.works .c-text h3 { font-size: 21px; }
+.works .c-text p { font-size: 14.5px; line-height: 1.45; color: var(--dim); }
+.works .c-tags { margin-top: 12px; }
+.works .c-tags li:nth-child(n + 4) { display: none; }
+.works .c-go { margin-top: auto; padding-top: 12px; }
+
+@media (max-width: 1100px) and (min-width: 861px) {
+  .works { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- botlar: ro'yxat va namuna suhbat ---------- */
+.bx { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 18px; margin-top: 34px; }
+.bx-list { display: grid; align-content: start; gap: 6px; }
+.bx-list button {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s, background 0.3s, border-color 0.3s;
+}
+.bx-list button:hover { opacity: 0.9; }
+.bx-list button.on { opacity: 1; background: var(--card); border-color: var(--line); }
+.bx-list img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.bx-list b { display: block; font-weight: 600; font-size: 16px; }
+.bx-list small { display: block; font: 12px var(--mono); color: var(--dim); }
+.bx-list .platform { position: static; font-style: normal; }
+
+.bx-chat { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); border-radius: 22px; background: var(--card); overflow: hidden; }
+.bx-top { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.bx-top img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.bx-top b { display: block; font-weight: 600; }
+.bx-top small { font: 12px var(--mono); color: var(--dim); }
+.bx-top > div { min-width: 0; }
+.bx-top small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bx-sample { flex: none; white-space: nowrap; margin-left: auto; padding: 3px 9px; border: 1px dashed var(--line); border-radius: 999px; font: 11px var(--mono); color: var(--dim); }
+.bx-body { display: flex; flex-direction: column; gap: 8px; height: 310px; padding: 18px; overflow-y: auto; scrollbar-width: none; }
+.bx-body::-webkit-scrollbar { display: none; }
+.bx-body > :first-child { margin-top: auto; }
+.bx-foot { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-top: 1px solid var(--line); }
+.bx-foot p { flex: 1; color: var(--dim); font-size: 14.5px; line-height: 1.45; }
+
+/* Telegram uslubi */
+.tg-msg { align-self: flex-start; max-width: 78%; animation: msg-in 0.35s var(--ease); }
+.tg-msg p { padding: 9px 13px; border-radius: 16px 16px 16px 4px; background: var(--card2); font-size: 15px; line-height: 1.4; }
+.tg-msg.me { align-self: flex-end; }
+.tg-msg.me p { border-radius: 16px 16px 4px 16px; background: var(--blue); color: var(--blue-ink); }
+.tg-kb { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 4px; margin-top: 4px; }
+.tg-kb span { padding: 7px 10px; border-radius: 10px; background: color-mix(in srgb, var(--blue) 14%, transparent); color: var(--blue); font-size: 13px; text-align: center; }
+.tg-msg.typing, .dc-typing { display: flex; gap: 4px; padding: 12px 14px; border-radius: 16px 16px 16px 4px; background: var(--card2); }
+.dc-typing { align-self: flex-start; background: none; padding: 4px 0 4px 46px; }
+.tg-msg.typing i, .dc-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--dim); animation: dot 1s infinite; }
+.tg-msg.typing i:nth-child(2), .dc-typing i:nth-child(2) { animation-delay: 0.15s; }
+.tg-msg.typing i:nth-child(3), .dc-typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dot { 0%, 60%, 100% { opacity: 0.3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+@keyframes msg-in { from { opacity: 0; transform: translateY(10px) scale(0.98); } }
+
+/* Discord uslubi */
+.dc-msg { display: grid; grid-template-columns: 34px 1fr; gap: 12px; animation: msg-in 0.35s var(--ease); }
+.dc-av { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+span.dc-av { display: grid; place-items: center; background: var(--card2); font-weight: 600; font-size: 14px; }
+.dc-msg b { font-weight: 600; font-size: 14.5px; }
+.dc-tag { margin-left: 6px; padding: 1px 5px; border-radius: 4px; background: #5865f2; color: #fff; font: 600 10px var(--sans); font-style: normal; vertical-align: 2px; }
+.dc-msg code { display: inline-block; margin-top: 3px; padding: 2px 7px; border-radius: 6px; background: var(--card2); font: 13.5px var(--mono); color: var(--blue); }
+.dc-embed { margin-top: 5px; padding: 9px 12px; border-left: 3px solid #5865f2; border-radius: 0 8px 8px 0; background: var(--card2); font-size: 14.5px; line-height: 1.45; }
+
+@media (prefers-reduced-motion: reduce) { .tg-msg, .dc-msg { animation: none; } }
+
 /* ---------- telefon ---------- */
 
 @media (max-width: 860px) {
@@ -1019,4 +1105,31 @@ kbd {
   .contact h2 { font-size: clamp(130px, 6vw, 170px); }
   .btn.big { font-size: 28px; padding: 28px 54px; }
   .foot { max-width: 2050px; font-size: 18px; }
+}
+
+
+/* telefonda ishlar — yonga suriladigan lenta, sahifa uzun bo'lib ketmaydi */
+@media (max-width: 860px) {
+  .works { display: flex; gap: 12px; margin: 26px -20px 0; padding: 4px 20px 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 20px; scrollbar-width: none; }
+  .works::-webkit-scrollbar { display: none; }
+  .works > div { flex: 0 0 82%; scroll-snap-align: start; }
+  .works .c-img { border-radius: 21px 21px 0 0; transform: none; }
+  .works .c-phone { width: 24%; transform: none; }
+  .works .c-text { transform: none; padding: 14px 16px 16px; }
+  .works .c-text h3 { font-size: 19px; }
+}
+
+/* telefonda botlar: ro'yxat yonga suriladi, suhbat ostida */
+@media (max-width: 860px) {
+  .bx { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+  .bx-list { display: flex; gap: 8px; margin: 0 -20px; padding: 0 20px 4px; overflow-x: auto; scrollbar-width: none; }
+  .bx-list::-webkit-scrollbar { display: none; }
+  .bx-list button { flex: 0 0 auto; grid-template-columns: 32px auto; gap: 8px; padding: 6px 12px 6px 6px; border-color: var(--line); border-radius: 999px; }
+  .bx-list img { width: 32px; height: 32px; }
+  .bx-list b { font-size: 14px; }
+  .bx-list small, .bx-list .platform { display: none; }
+  .bx-body { height: 290px; padding: 14px; }
+  .bx-foot { flex-direction: column; align-items: stretch; gap: 10px; }
+  .bx-foot .btn { text-align: center; }
+  .bx-top { padding: 12px 14px; }
 }

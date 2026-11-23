@@ -23,7 +23,7 @@ const DICT = {
     works: { title: "Ishlar", site: "Saytni ko'rish ↗", details: "Batafsil →", open: "Saytni ochish ↗", code: "Kodni ko'rish ↗", exe: "Windows (EXE) ↓", apk: "Android ilova (APK) ↓", close: "Yopish", prev: "Oldingi", next: "Keyingi", desktop: "Kompyuterda", mobile: "Telefonda",
       filters: ["Hammasi", "Saytlar", "Ilovalar"], filterLabel: "Ishlarni saralash",
       stats: [["loyiha"], ["bot"], ["platforma"]] },
-    bots: { title: "Botlar", sub: "Telegram va Discord uchun. Kartani bosing yoki ustiga olib boring — orqa tomoni ochiladi.", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
+    bots: { title: "Botlar", sub: "Telegram va Discord uchun. Botni tanlang — u qanday ishlashini namuna suhbatda ko'rasiz.", sample: "namuna suhbat", you: "Siz", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
     process: {
       title: "Sun'iy intellekt bilan ishlayman",
       sub: "Har loyiha shu to'rt bosqichdan o'tadi. Kod oynasi hozir qaysi bosqichda ekanini ko'rsatib turadi.",
@@ -89,7 +89,7 @@ const DICT = {
     works: { title: "Работы", site: "Открыть сайт ↗", details: "Подробнее →", open: "Открыть сайт ↗", code: "Смотреть код ↗", exe: "Windows (EXE) ↓", apk: "Android-приложение (APK) ↓", close: "Закрыть", prev: "Назад", next: "Далее", desktop: "На компьютере", mobile: "На телефоне",
       filters: ["Все", "Сайты", "Приложения"], filterLabel: "Фильтр работ",
       stats: [["проектов"], ["ботов"], ["платформы"]] },
-    bots: { title: "Боты", sub: "Для Telegram и Discord. Нажмите на карточку или наведите курсор — откроется обратная сторона.", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
+    bots: { title: "Боты", sub: "Для Telegram и Discord. Выберите бота — пример диалога покажет, как он работает.", sample: "пример диалога", you: "Вы", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
     process: {
       title: "Работаю с искусственным интеллектом",
       sub: "Каждый проект проходит эти четыре этапа. Окно с кодом показывает, на каком этапе он сейчас.",
@@ -155,7 +155,7 @@ const DICT = {
     works: { title: "Work", site: "Open the site ↗", details: "Details →", open: "Open the site ↗", code: "View code ↗", exe: "Windows (EXE) ↓", apk: "Android app (APK) ↓", close: "Close", prev: "Previous", next: "Next", desktop: "Desktop", mobile: "Mobile",
       filters: ["All", "Websites", "Apps"], filterLabel: "Filter work",
       stats: [["projects"], ["bots"], ["platforms"]] },
-    bots: { title: "Bots", sub: "For Telegram and Discord. Tap a card or hover over it to flip it.", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
+    bots: { title: "Bots", sub: "For Telegram and Discord. Pick a bot to see how it works in a sample chat.", sample: "sample chat", you: "You", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
     process: {
       title: "I work with AI",
       sub: "Every project goes through these four steps. The code window shows which one it is in right now.",
