@@ -5,6 +5,7 @@ import { LANGS, LangProvider, useLang } from "./i18n.jsx";
 import Backdrop from "./components/Backdrop.jsx";
 import Quantum from "./components/Quantum.jsx";
 import "./styles.css";
+import Icon, { Lbl } from "./components/Icon.jsx";
 
 // gradient variantini sinash uchun: ?rang=sovish | shafaq | sadaf | olov (sessiya davomida eslab qolinadi)
 try {
@@ -22,7 +23,7 @@ function KvantPage() {
       <header className="nav">
         <a className="logo" href="/">Javohir<i>.</i></a>
         <nav>
-          <a href="/">{t.quantum.back}</a>
+          <a href="/"><Lbl s={t.quantum.back} /></a>
         </nav>
         <div className="langs" role="group" aria-label="Til / Язык / Language">
           {LANGS.map((l) => (
@@ -34,8 +35,8 @@ function KvantPage() {
         <Quantum page />
       </main>
       <footer className="foot q-foot">
-        <a className="link" href="/">{t.quantum.back}</a>
-        <a className="link" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">Telegram ↗</a>
+        <a className="link" href="/"><Lbl s={t.quantum.back} /></a>
+        <a className="link" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener"><Lbl s="Telegram ↗" icon="telegram" /></a>
       </footer>
     </>
   );

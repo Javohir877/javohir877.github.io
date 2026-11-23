@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 // three.js og'ir, shuning uchun 3D sahna alohida yuklanadi
 const QuantumScene = lazy(() => import("./QuantumScene.jsx"));
@@ -54,7 +55,7 @@ export default function Hero({ phase, bots }) {
         </h1>
         <p className="hero-links">
           <a className="btn" href="#ishlar">{t.hero.cta}</a>
-          <a className="link" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">{t.hero.tg}</a>
+          <a className="link" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener"><Lbl s={t.hero.tg} icon="telegram" /></a>
         </p>
       </div>
 
@@ -70,7 +71,7 @@ export default function Hero({ phase, bots }) {
         <Suspense fallback={null}>
           <QuantumScene hero bots={bots} active={active} closed={closed} onPick={pick} onToggle={toggle} onReady={onReady} onBot={setBot} />
         </Suspense>
-        {bot && <span className="bot-tip" style={{ left: bot.x, top: bot.y }}>{bot.name} ↗</span>}
+        {bot && <span className="bot-tip" style={{ left: bot.x, top: bot.y }}>{bot.name} <Icon name="out" size={13} /></span>}
         <div className="stage-ui">
           <p className="screen-name" aria-live="polite">
             {cool !== null
@@ -78,7 +79,7 @@ export default function Hero({ phase, bots }) {
               : closed ? q.closedNote : <><span className="q-temp">{temp}</span> {name}</>}
           </p>
           <p className="stage-links">
-            <a className="link" href="/kvant/">{t.hero.more}</a>
+            <a className="link" href="/kvant/"><Lbl s={t.hero.more} /></a>
           </p>
           <p className="hint">{t.hero.hint}</p>
         </div>

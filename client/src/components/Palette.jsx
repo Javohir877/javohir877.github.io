@@ -1,6 +1,7 @@
 // Tezkor qidiruv (Ctrl+K yoki "/"): bo'limlar, loyihalar, botlar, til va havolalar.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { LANGS, useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 const SECTIONS = [["ishlar", "works"], ["botlar", "bots"], ["jarayon", "process"], ["kvant", "quantum"], ["github", "github"], ["aloqa", "contact"]];
 const LANG_NAMES = { uz: "O'zbekcha", ru: "Русский", en: "English" };
@@ -35,23 +36,23 @@ export default function Palette({ open, setOpen, sites, bots, onProject }) {
   const items = useMemo(() => {
     const all = [
       ...SECTIONS.map(([id, key]) => ({
-        kind: t.palette.section, label: t.nav[key], icon: "#",
+        kind: t.palette.section, label: t.nav[key], icon: "section",
         run: () => (id === "kvant" ? location.assign("/kvant/") : document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })),
       })),
       ...sites.map((s, i) => ({
-        kind: t.palette.project, label: s.name, extra: pick(s.text), icon: "◆",
+        kind: t.palette.project, label: s.name, extra: pick(s.text), icon: "project",
         run: () => onProject(i),
       })),
       ...bots.filter((b) => b.url).map((b) => ({
-        kind: t.palette.bot, label: b.name, extra: b.platform === "discord" ? "Discord" : "@" + b.user, icon: "↗",
+        kind: t.palette.bot, label: b.name, extra: b.platform === "discord" ? "Discord" : "@" + b.user, icon: b.platform,
         run: () => window.open(b.url, "_blank", "noopener"),
       })),
       ...LANGS.map((l) => ({
-        kind: t.palette.lang, label: LANG_NAMES[l], extra: l.toUpperCase(), icon: "文",
+        kind: t.palette.lang, label: LANG_NAMES[l], extra: l.toUpperCase(), icon: "lang",
         run: () => setLang(l),
       })),
-      { kind: t.palette.link, label: "Telegram", extra: "@ByJavohir_aep", icon: "↗", run: () => window.open("https://t.me/ByJavohir_aep", "_blank", "noopener") },
-      { kind: t.palette.link, label: "GitHub", extra: "Javohir877", icon: "↗", run: () => window.open("https://github.com/Javohir877", "_blank", "noopener") },
+      { kind: t.palette.link, label: "Telegram", extra: "@ByJavohir_aep", icon: "telegram", run: () => window.open("https://t.me/ByJavohir_aep", "_blank", "noopener") },
+      { kind: t.palette.link, label: "GitHub", extra: "Javohir877", icon: "github", run: () => window.open("https://github.com/Javohir877", "_blank", "noopener") },
     ];
     const needle = q.trim().toLowerCase();
     if (!needle) return all;
@@ -80,7 +81,7 @@ export default function Palette({ open, setOpen, sites, bots, onProject }) {
     <div className="modal pal-wrap" onMouseDown={(e) => e.target === e.currentTarget && setOpen(false)}>
       <div className="pal" role="dialog" aria-modal="true" aria-label={t.palette.hint}>
         <div className="pal-in">
-          <span className="pal-icon" aria-hidden="true">⌕</span>
+          <span className="pal-icon" aria-hidden="true"><Icon name="search" size={18} /></span>
           <input
             ref={input}
             value={q}
@@ -105,7 +106,7 @@ export default function Palette({ open, setOpen, sites, bots, onProject }) {
               onMouseEnter={() => setActive(i)}
               onClick={() => run(it)}
             >
-              <span className="pi">{it.icon}</span>
+              <span className="pi"><Icon name={it.icon} size={16} /></span>
               <span className="pl">{it.label}{it.extra && <small>{it.extra}</small>}</span>
               <span className="pk">{it.kind}</span>
             </li>

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
+import SplitTitle from "./SplitTitle.jsx";
 
 const finePointer = typeof matchMedia !== "undefined" && matchMedia("(hover: hover) and (pointer: fine)").matches;
 const reduced = typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -63,7 +65,7 @@ function WorkCard({ site, i, onOpen }) {
   const { t, pick } = useLang();
   const reveal = useReveal();
   return (
-    <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ transitionDelay: (i % 3) * 0.08 + "s" }}>
+    <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ "--d": (i % 3) * 0.12 + "s" }}>
       {/* oddiy bosish — loyiha oynasi, g'ildirakcha / Ctrl bilan — saytning o'zi yangi tabda */}
       <Tilt
         as="a"
@@ -89,7 +91,7 @@ function WorkCard({ site, i, onOpen }) {
           {site.tags?.length > 0 && (
             <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>
           )}
-          <span className="c-go">{t.works.details}</span>
+          <span className="c-go"><Lbl s={t.works.details} /></span>
         </div>
       </Tilt>
     </div>
@@ -129,16 +131,13 @@ const FILTERS = [
 
 export default function Works({ sites, bots = [], onOpen }) {
   const { t } = useLang();
-  const title = useReveal();
   const [f, setF] = useState(0);
   const platforms = new Set(sites.flatMap((s) => s.platforms || []));
   const stats = [sites.length, bots.length, platforms.size];
   return (
     <section className="sec" id="ishlar">
       <div className="works-head">
-        <h2 className="sec-title split rv" ref={title}>
-          {t.works.title.split(" ").map((w, i) => <span key={i} className="w" style={{ "--i": i }}><span>{w}</span></span>)}
-        </h2>
+        <SplitTitle text={t.works.title} />
         <p className="w-stats">
           {stats.map((n, i) => <span key={i}><Count to={n} /> {t.works.stats[i][0]}</span>)}
         </p>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
 import SplitTitle from "./SplitTitle.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 const reduced = typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -122,7 +123,7 @@ export default function Bots({ bots }) {
                 <b>{b.name}</b>
                 <small>{b.platform === "discord" ? t.bots.discord : "@" + b.user}</small>
               </span>
-              <i className={"platform " + b.platform}>{b.platform === "discord" ? "Discord" : "Telegram"}</i>
+              <i className={"platform " + b.platform} title={b.platform === "discord" ? "Discord" : "Telegram"}><Icon name={b.platform} size={14} /></i>
             </button>
           ))}
         </div>
@@ -141,7 +142,7 @@ export default function Bots({ bots }) {
             <p>{pick(bot.text)}</p>
             {bot.url && (
               <a className="btn sm" href={bot.url} target="_blank" rel="noopener">
-                {discord ? t.bots.invite : t.bots.open}
+                <Lbl s={discord ? t.bots.invite : t.bots.open} icon={bot.platform} />
               </a>
             )}
           </footer>

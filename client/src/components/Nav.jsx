@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { LANGS, useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 const SECTIONS = ["ishlar", "botlar", "jarayon", "kvant", "github", "aloqa"];
 const KEYS = ["works", "bots", "process", "quantum", "github", "contact"];
@@ -42,7 +43,7 @@ export default function Nav({ onSearch }) {
         ))}
       </nav>
       <button className="nav-search" onClick={onSearch} aria-label={t.palette.hint} title={t.palette.hint + " (Ctrl+K)"}>
-        <span aria-hidden="true">⌕</span><kbd>Ctrl K</kbd>
+        <Icon name="search" size={15} /><kbd>Ctrl K</kbd>
       </button>
       <div className="langs" role="group" aria-label="Til / Язык / Language">
         {LANGS.map((l) => (

@@ -1,6 +1,7 @@
 // O'ng pastdagi "tepaga" tugmasi: atrofidagi halqa sahifaning qancha qismi o'qilganini ko'rsatadi.
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 const R = 20;
 const C = 2 * Math.PI * R;
@@ -42,7 +43,7 @@ export default function ToTop() {
         <circle cx="24" cy="24" r={R} className="tt-track" />
         <circle ref={ring} cx="24" cy="24" r={R} className="tt-ring" strokeDasharray={C} strokeDashoffset={C} />
       </svg>
-      <span aria-hidden="true">↑</span>
+      <Icon name="up" size={18} />
     </button>
   );
 }

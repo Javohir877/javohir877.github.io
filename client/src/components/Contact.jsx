@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 const finePointer = typeof matchMedia !== "undefined" && matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -27,8 +28,8 @@ export default function Contact() {
         <p className="sec-sub">{t.contact.sub}</p>
       </div>
       <div className="contact-cta rv" ref={cta}>
-        <a ref={magnet} className="btn big magnet" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener">{t.contact.btn}</a>
-        <a className="link" href="https://github.com/Javohir877" target="_blank" rel="noopener">GitHub ›</a>
+        <a ref={magnet} className="btn big magnet" href="https://t.me/ByJavohir_aep" target="_blank" rel="noopener"><Lbl s={t.contact.btn} icon="telegram" /></a>
+        <a className="link" href="https://github.com/Javohir877" target="_blank" rel="noopener"><Lbl s="GitHub ↗" icon="github" /></a>
       </div>
     </section>
   );

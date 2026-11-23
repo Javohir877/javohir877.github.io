@@ -2,6 +2,7 @@
 // Esc — yopish, ← → — loyihalar orasida yurish.
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 export default function ProjectModal({ sites, index, onClose, onNav }) {
   const { t, pick } = useLang();
@@ -57,9 +58,9 @@ export default function ProjectModal({ sites, index, onClose, onNav }) {
             <h3 id="pm-title">{site.name}</h3>
           </div>
           <div className="pm-nav">
-            <button onClick={() => onNav(-1)} aria-label={t.works.prev}>←</button>
-            <button onClick={() => onNav(1)} aria-label={t.works.next}>→</button>
-            <button ref={closeBtn} onClick={onClose} aria-label={t.works.close}>✕</button>
+            <button onClick={() => onNav(-1)} aria-label={t.works.prev}><Icon name="prev" size={18} /></button>
+            <button onClick={() => onNav(1)} aria-label={t.works.next}><Icon name="next" size={18} /></button>
+            <button ref={closeBtn} onClick={onClose} aria-label={t.works.close}><Icon name="close" size={18} /></button>
           </div>
         </header>
 
@@ -86,10 +87,10 @@ export default function ProjectModal({ sites, index, onClose, onNav }) {
             <p className="pm-about">{pick(site.about)}</p>
             <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>
             <p className="pm-links">
-              <a className="btn" href={site.url} target="_blank" rel="noopener">{t.works.open}</a>
-              {site.exe && <a className="link" href={site.exe} rel="noopener">{t.works.exe}</a>}
-              {site.apk && <a className="link" href={site.apk} rel="noopener">{t.works.apk}</a>}
-              {site.repo && <a className="link" href={site.repo} target="_blank" rel="noopener">{t.works.code}</a>}
+              <a className="btn" href={site.url} target="_blank" rel="noopener"><Lbl s={t.works.open} /></a>
+              {site.exe && <a className="link" href={site.exe} rel="noopener"><Lbl s={t.works.exe} icon="windows" /></a>}
+              {site.apk && <a className="link" href={site.apk} rel="noopener"><Lbl s={t.works.apk} icon="android" /></a>}
+              {site.repo && <a className="link" href={site.repo} target="_blank" rel="noopener"><Lbl s={t.works.code} icon="github" /></a>}
             </p>
           </div>
         </div>

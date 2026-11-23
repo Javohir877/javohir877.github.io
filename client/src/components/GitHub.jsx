@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
 import SplitTitle from "./SplitTitle.jsx";
+import Icon, { Lbl } from "./Icon.jsx";
 
 const USER = "Javohir877";
 // portfolioning o'zi va ishlamaydigan loyihalar ko'rsatilmaydi
@@ -117,7 +118,7 @@ export default function GitHub({ sites = [] }) {
           {shown?.counts ? <Heatmap counts={shown.counts} t={t} /> : offline ? null : <div className="heat skeleton" />}
           <a className="gh-profile" href={`https://github.com/${USER}`} target="_blank" rel="noopener">
             {shown?.repoCount != null && <><b>{shown.repoCount}</b> {t.gh.repos}</>}
-            <span className="link">{t.gh.profile}</span>
+            <span className="link"><Lbl s={t.gh.profile} icon="github" /></span>
           </a>
         </div>
         <ul className="gh-repos">
