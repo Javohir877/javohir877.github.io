@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { useLang } from "../i18n.jsx";
 import Icon, { Lbl } from "./Icon.jsx";
@@ -61,43 +61,6 @@ export function Tilt({ className = "", max = 9, as: Tag = "div", children, ...re
   );
 }
 
-function WorkCard({ site, i, onOpen }) {
-  const { t, pick } = useLang();
-  const reveal = useReveal();
-  return (
-    <div ref={reveal} className={"rv" + (site.wide ? " wide" : "")} style={{ "--d": (i % 3) * 0.12 + "s" }}>
-      {/* oddiy bosish — loyiha oynasi, g'ildirakcha / Ctrl bilan — saytning o'zi yangi tabda */}
-      <Tilt
-        as="a"
-        className={"card c-" + site.id}
-        href={site.url}
-        target="_blank"
-        rel="noopener"
-        onClick={(e) => {
-          if (e.ctrlKey || e.metaKey || e.shiftKey) return;
-          e.preventDefault();
-          onOpen(i);
-        }}
-      >
-        <div className="c-shot">
-          <img className="c-img" src={site.img} alt={site.name} width="1440" height="900" loading="lazy" />
-          {site.phone && (
-            <div className="c-phone"><img src={site.phone} alt="" width="780" height="1688" loading="lazy" /></div>
-          )}
-        </div>
-        <div className="c-text">
-          <h3>{site.name}</h3>
-          <p>{pick(site.text)}</p>
-          {site.tags?.length > 0 && (
-            <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>
-          )}
-          <span className="c-go"><Lbl s={t.works.details} /></span>
-        </div>
-      </Tilt>
-    </div>
-  );
-}
-
 // raqam ko'ringanda 0 dan sanab chiqadi
 function Count({ to }) {
   const ref = useRef(null);
@@ -123,17 +86,44 @@ function Count({ to }) {
   return <b ref={ref}>{String(n).padStart(2, "0")}</b>;
 }
 
-const FILTERS = [
-  () => true,
-  (s) => s.platforms?.includes("web"),
-  (s) => s.platforms?.some((p) => p === "android" || p === "windows"),
-];
+// 3D sahna og'ir — faqat bo'limga yaqinlashganda yuklanadi
+const DevicesScene = lazy(() => import("./DevicesScene.jsx"));
+
+const PLATFORM_ICON = { web: null, android: "android", windows: "windows" };
 
 export default function Works({ sites, bots = [], onOpen }) {
-  const { t } = useLang();
-  const [f, setF] = useState(0);
+  const { t, pick } = useLang();
+  const [sel, setSel] = useState(0);
+  const [mount, setMount] = useState(false);
+  const touched = useRef(0);
+  const stage = useRef(null);
+  const side = useReveal();
   const platforms = new Set(sites.flatMap((s) => s.platforms || []));
   const stats = [sites.length, bots.length, platforms.size];
+  const site = sites[sel] || sites[0];
+
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setMount(true); io.disconnect(); }
+    }, { rootMargin: "500px 0px" });
+    io.observe(stage.current);
+    return () => io.disconnect();
+  }, []);
+
+  // hech kim tegmasa, loyihalar o'zi almashadi (bo'lim ko'rinib turganda)
+  useEffect(() => {
+    if (reduced) return;
+    let on = false;
+    const io = new IntersectionObserver(([e]) => { on = e.isIntersecting; }, { threshold: 0.4 });
+    io.observe(stage.current);
+    const id = setInterval(() => {
+      if (on && Date.now() - touched.current > 12000) setSel((s) => (s + 1) % sites.length);
+    }, 6500);
+    return () => { clearInterval(id); io.disconnect(); };
+  }, [sites.length]);
+
+  const choose = (i) => { touched.current = Date.now(); setSel(i); };
+
   return (
     <section className="sec" id="ishlar">
       <div className="works-head">
@@ -141,17 +131,42 @@ export default function Works({ sites, bots = [], onOpen }) {
         <p className="w-stats">
           {stats.map((n, i) => <span key={i}><Count to={n} /> {t.works.stats[i][0]}</span>)}
         </p>
-        <div className="w-filter" role="group" aria-label={t.works.filterLabel}>
-          {t.works.filters.map((label, i) => (
-            <button key={i} className={f === i ? "on" : ""} aria-pressed={f === i} onClick={() => setF(i)}>
-              {label} <i>{sites.filter(FILTERS[i]).length}</i>
-            </button>
-          ))}
-        </div>
       </div>
-      {/* filtr almashganda kartalar qaytadan, navbat bilan paydo bo'ladi */}
-      <div className="works" key={f}>
-        {sites.map((s, i) => FILTERS[f](s) && <WorkCard key={s.id} site={s} i={i} onOpen={onOpen} />)}
+
+      <div className="dv">
+        <div className="dv-stage" ref={stage}>
+          {mount && (
+            <Suspense fallback={null}>
+              <DevicesScene sites={sites} index={sel} onOpen={onOpen} />
+            </Suspense>
+          )}
+          <img className="dv-fallback" src={site.img} alt={site.name} />
+          <p className="hint">{t.works.hint}</p>
+        </div>
+
+        <div className="dv-side rv" ref={side}>
+          <ol className="dv-list" role="tablist" aria-label={t.works.title}>
+            {sites.map((s, i) => (
+              <li key={s.id}>
+                <button role="tab" aria-selected={i === sel} className={i === sel ? "on" : ""} onClick={() => choose(i)}>
+                  <span className="dv-n">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="dv-name">{s.name}</span>
+                  <span className="dv-pf">
+                    {(s.platforms || []).map((p) => PLATFORM_ICON[p] && <Icon key={p} name={PLATFORM_ICON[p]} size={13} />)}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <div className="dv-info" key={site.id}>
+            <p className="dv-text">{pick(site.text)}</p>
+            {site.tags?.length > 0 && <ul className="c-tags">{site.tags.map((tg) => <li key={tg}>{tg}</li>)}</ul>}
+            <p className="dv-acts">
+              <button className="btn sm" onClick={() => onOpen(sel)}><Lbl s={t.works.details} /></button>
+              <a className="link" href={site.url} target="_blank" rel="noopener"><Lbl s={t.works.site} /></a>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

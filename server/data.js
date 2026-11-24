@@ -65,6 +65,7 @@ export const SITES = [
     tags: ["React", "Vite", "Cloudflare D1", "PWA"],
     url: "https://javohir877.github.io/OLOV-FOOD/",
     img: "/img/olov.webp",
+    phone: "/img/olov-m.webp",
   },
   {
     id: "hojiakbar",
@@ -84,6 +85,7 @@ export const SITES = [
     tags: ["React", "Express", "ffmpeg"],
     url: "https://javohir877.github.io/byhojiakbar-portfolio/",
     img: "/img/hojiakbar.webp",
+    phone: "/img/hojiakbar-m.webp",
   },
   {
     id: "hisobla",

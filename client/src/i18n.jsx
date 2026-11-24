@@ -21,7 +21,7 @@ const DICT = {
       screens: "Ekranlar",
     },
     works: { title: "Ishlar", site: "Saytni ko'rish ↗", details: "Batafsil →", open: "Saytni ochish ↗", code: "Kodni ko'rish ↗", exe: "Windows (EXE) ↓", apk: "Android ilova (APK) ↓", close: "Yopish", prev: "Oldingi", next: "Keyingi", desktop: "Kompyuterda", mobile: "Telefonda",
-      filters: ["Hammasi", "Saytlar", "Ilovalar"], filterLabel: "Ishlarni saralash",
+      filters: ["Hammasi", "Saytlar", "Ilovalar"], filterLabel: "Ishlarni saralash", hint: "sudrang — buriladi · ekranni bosing — batafsil",
       stats: [["loyiha"], ["bot"], ["platforma"]] },
     bots: { title: "Botlar", sub: "Telegram va Discord uchun. Botni tanlang — u qanday ishlashini namuna suhbatda ko'rasiz.", sample: "namuna suhbat", you: "Siz", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
     process: {
@@ -88,7 +88,7 @@ const DICT = {
       screens: "Экраны",
     },
     works: { title: "Работы", site: "Открыть сайт ↗", details: "Подробнее →", open: "Открыть сайт ↗", code: "Смотреть код ↗", exe: "Windows (EXE) ↓", apk: "Android-приложение (APK) ↓", close: "Закрыть", prev: "Назад", next: "Далее", desktop: "На компьютере", mobile: "На телефоне",
-      filters: ["Все", "Сайты", "Приложения"], filterLabel: "Фильтр работ",
+      filters: ["Все", "Сайты", "Приложения"], filterLabel: "Фильтр работ", hint: "тяните — поворачивается · нажмите на экран — подробнее",
       stats: [["проектов"], ["ботов"], ["платформы"]] },
     bots: { title: "Боты", sub: "Для Telegram и Discord. Выберите бота — пример диалога покажет, как он работает.", sample: "пример диалога", you: "Вы", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
     process: {
@@ -155,7 +155,7 @@ const DICT = {
       screens: "Screens",
     },
     works: { title: "Work", site: "Open the site ↗", details: "Details →", open: "Open the site ↗", code: "View code ↗", exe: "Windows (EXE) ↓", apk: "Android app (APK) ↓", close: "Close", prev: "Previous", next: "Next", desktop: "Desktop", mobile: "Mobile",
-      filters: ["All", "Websites", "Apps"], filterLabel: "Filter work",
+      filters: ["All", "Websites", "Apps"], filterLabel: "Filter work", hint: "drag to turn · tap a screen for details",
       stats: [["projects"], ["bots"], ["platforms"]] },
     bots: { title: "Bots", sub: "For Telegram and Discord. Pick a bot to see how it works in a sample chat.", sample: "sample chat", you: "You", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
     process: {
