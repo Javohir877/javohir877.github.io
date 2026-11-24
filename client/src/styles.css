@@ -1277,3 +1277,10 @@ pre.art { display: grid; white-space: pre-wrap; word-break: break-word; overflow
   .dv-info { margin-top: 14px; padding: 0; }
   .dv-text { font-size: 15px; }
 }
+
+/* raqamlar: qalin, bir xil kenglikdagi raqamlar */
+.dv-n, .pipe-n { font: 700 15px/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: color-mix(in srgb, var(--fg) 35%, transparent); }
+.dv-list button { grid-template-columns: 34px 1fr auto; }
+.dv-list button.on .dv-n, .pipe-steps li.on .pipe-n { color: var(--blue); }
+.pipe-n { font-size: 17px; }
+.w-stats b { font: 700 20px/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }

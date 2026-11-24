@@ -87,31 +87,101 @@ export default function DevicesScene({ sites, index, onOpen }) {
     const root = new THREE.Group();
     scene.add(root);
 
-    // noutbuk: korpus "space gray" alyumin
-    const alu = new THREE.MeshPhysicalMaterial({ color: 0x4b4f58, metalness: 0.85, roughness: 0.38, envMapIntensity: 0.9 });
-    const dark = new THREE.MeshStandardMaterial({ color: 0x15171b, roughness: 0.7 });
-    const black = new THREE.MeshBasicMaterial({ color: 0x050506 });
+    // noutbuk: "space gray" alyumin korpus, old tomoni chetigacha qora shisha
+    const alu = new THREE.MeshPhysicalMaterial({ color: 0x50545d, metalness: 0.9, roughness: 0.32, clearcoat: 0.25, envMapIntensity: 1 });
+    const aluDark = new THREE.MeshPhysicalMaterial({ color: 0x2c2f35, metalness: 0.85, roughness: 0.45 });
+    const well = new THREE.MeshStandardMaterial({ color: 0x0e0f12, roughness: 0.85 });
+    const keyMat = new THREE.MeshPhysicalMaterial({ color: 0x17191d, roughness: 0.55, clearcoat: 0.3 });
+    const black = new THREE.MeshPhysicalMaterial({ color: 0x050506, roughness: 0.08, clearcoat: 1, clearcoatRoughness: 0.05 });
     const laptop = new THREE.Group();
-    const base = new THREE.Mesh(new RoundedBoxGeometry(1.6, 0.05, 1.08, 4, 0.02), alu);
-    base.position.y = 0.025;
-    const keys = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.5), dark);
-    keys.rotation.x = -Math.PI / 2;
-    keys.position.set(0, 0.0506, -0.14);
-    const pad = new THREE.Mesh(roundedPlane(0.5, 0.3, 0.03), new THREE.MeshPhysicalMaterial({ color: 0x3e424a, metalness: 0.6, roughness: 0.3 }));
-    pad.rotation.x = -Math.PI / 2;
-    pad.position.set(0, 0.0506, 0.3);
-    laptop.add(base, keys, pad);
 
+    // pastki qism: ikki qatlamli plita — tepasi biroz torayadi (yumshoq qirra)
+    const base = new THREE.Mesh(new RoundedBoxGeometry(1.6, 0.034, 1.08, 6, 0.016), alu);
+    base.position.y = 0.017;
+    const baseTop = new THREE.Mesh(new RoundedBoxGeometry(1.585, 0.02, 1.065, 6, 0.01), alu);
+    baseTop.position.y = 0.036;
+    // old qirradagi barmoq botig'i
+    const notch = new THREE.Mesh(new RoundedBoxGeometry(0.22, 0.012, 0.03, 3, 0.005), aluDark);
+    notch.position.set(0, 0.04, 0.533);
+    laptop.add(base, baseTop, notch);
+
+    // klaviatura: botiq maydon va alohida tugmachalar (InstancedMesh — bitta chizish)
+    const deck = 0.0462;
+    const kwell = new THREE.Mesh(roundedPlane(1.34, 0.5, 0.02), well);
+    kwell.rotation.x = -Math.PI / 2;
+    kwell.position.set(0, deck, -0.15);
+    laptop.add(kwell);
+    const KW = 0.078, GAP = 0.0105, COLS = 14, ROWS = 6;
+    const keyGeo = new RoundedBoxGeometry(KW, 0.008, KW * 0.9, 2, 0.006);
+    const keyInst = new THREE.InstancedMesh(keyGeo, keyMat, COLS * ROWS);
+    const m4 = new THREE.Matrix4();
+    let n = 0;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const x = -((COLS - 1) * (KW + GAP)) / 2 + c * (KW + GAP);
+        const z = -0.37 + r * (KW * 0.9 + GAP);
+        // pastki qatorda probel: o'rtadagi tugmalar bitta keng tugmaga qo'shiladi
+        if (r === ROWS - 1 && c >= 4 && c <= 9) {
+          if (c === 4) {
+            m4.compose(new THREE.Vector3(x + (KW + GAP) * 2.5, deck + 0.004, z), new THREE.Quaternion(), new THREE.Vector3(6 + 5 * GAP / KW, 1, 1));
+            keyInst.setMatrixAt(n++, m4);
+          }
+          continue;
+        }
+        m4.makeTranslation(x, deck + 0.004, z);
+        keyInst.setMatrixAt(n++, m4);
+      }
+    }
+    keyInst.count = n;
+    laptop.add(keyInst);
+
+    // sensorli panel va dinamik panjaralari
+    const pad = new THREE.Mesh(roundedPlane(0.56, 0.32, 0.03), new THREE.MeshPhysicalMaterial({ color: 0x464a52, metalness: 0.5, roughness: 0.22, clearcoat: 0.6 }));
+    pad.rotation.x = -Math.PI / 2;
+    pad.position.set(0, deck + 0.0004, 0.3);
+    laptop.add(pad);
+    const holeGeo = new THREE.CircleGeometry(0.0045, 8);
+    const holes = new THREE.InstancedMesh(holeGeo, well, 2 * 7 * 26);
+    let h = 0;
+    for (const side of [-1, 1]) {
+      for (let r = 0; r < 26; r++) {
+        for (let c = 0; c < 7; c++) {
+          m4.makeRotationX(-Math.PI / 2);
+          m4.setPosition(side * (0.645 + c * 0.0135), deck + 0.0003, -0.38 + r * 0.0175);
+          holes.setMatrixAt(h++, m4);
+        }
+      }
+    }
+    laptop.add(holes);
+
+    // sharnir: orqa qirradagi silindr
+    const hingeBar = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 1.3, 24), aluDark);
+    hingeBar.rotation.z = Math.PI / 2;
+    hingeBar.position.set(0, 0.046, -0.528);
+    laptop.add(hingeBar);
+
+    // qopqoq: orqasi alyumin, oldi butun yuza bo'ylab qora shisha (ramka yo'q)
     const hinge = new THREE.Group();
-    hinge.position.set(0, 0.05, -0.53);
-    const lid = new THREE.Mesh(new RoundedBoxGeometry(1.6, 1.04, 0.026, 4, 0.012), alu);
-    lid.position.y = 0.52;
-    const bezel = new THREE.Mesh(roundedPlane(1.56, 1.0, 0.03), black);
-    bezel.position.set(0, 0.52, 0.0135);
+    hinge.position.set(0, 0.046, -0.528);
+    const LW = 1.6, LH = 1.04, LT = 0.022;
+    const lid = new THREE.Mesh(new RoundedBoxGeometry(LW, LH, LT, 6, 0.011), alu);
+    lid.position.y = LH / 2 + 0.012;
+    const bezel = new THREE.Mesh(roundedPlane(LW - 0.006, LH - 0.006, 0.03), black);
+    bezel.position.set(0, lid.position.y, LT / 2 + 0.0006);
     const lapMat = new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false });
-    const lapScreen = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.9375), lapMat);
-    lapScreen.position.set(0, 0.545, 0.0142);
-    hinge.add(lid, bezel, lapScreen);
+    // ekran 16:10, tepada kamera uchun biroz joy qoladi
+    const lapScreen = new THREE.Mesh(roundedPlane(1.52, 0.95, 0.012), lapMat);
+    lapScreen.position.set(0, lid.position.y - 0.018, LT / 2 + 0.0012);
+    const cam = new THREE.Mesh(new THREE.CircleGeometry(0.008, 16), new THREE.MeshBasicMaterial({ color: 0x1b2433 }));
+    cam.position.set(0, lid.position.y + LH / 2 - 0.022, LT / 2 + 0.0012);
+    // shisha yaltirashi: ekran ustidagi juda shaffof qatlam
+    const glare = new THREE.Mesh(roundedPlane(LW - 0.006, LH - 0.006, 0.03), new THREE.MeshPhysicalMaterial({ transparent: true, opacity: 0.06, roughness: 0.02, clearcoat: 1 }));
+    glare.position.set(0, lid.position.y, LT / 2 + 0.0018);
+    // qopqoq orqasidagi belgi
+    const logo = new THREE.Mesh(new THREE.CircleGeometry(0.07, 48), new THREE.MeshPhysicalMaterial({ color: 0x8a8f98, metalness: 1, roughness: 0.15 }));
+    logo.rotation.y = Math.PI;
+    logo.position.set(0, lid.position.y, -LT / 2 - 0.0008);
+    hinge.add(lid, bezel, lapScreen, cam, glare, logo);
     hinge.rotation.x = LID_OPEN;
     laptop.add(hinge);
     laptop.position.set(-0.32, 0, 0);
@@ -158,7 +228,7 @@ export default function DevicesScene({ sites, index, onOpen }) {
       const r = canvas.getBoundingClientRect();
       ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
       ray.setFromCamera(ndc, camera);
-      return ray.intersectObjects([lapScreen, phScreen, body, lid], false).length > 0;
+      return ray.intersectObjects([lapScreen, bezel, phScreen, body, lid], false).length > 0;
     };
     const down = (e) => { dragging = true; dragX = e.clientX; moved = 0; canvas.setPointerCapture(e.pointerId); };
     const move = (e) => {
