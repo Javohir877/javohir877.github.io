@@ -187,15 +187,69 @@ export default function DevicesScene({ sites, index, onOpen }) {
     laptop.position.set(-0.32, 0, 0);
     root.add(laptop);
 
-    // telefon: grafit korpus, tik turibdi
+    // telefon: yon tomonlari tekis metall ramka, oldi va orqasi shisha, tik turibdi
+    const PW = 0.42, PH = 0.88, PD = 0.042, PR = 0.065, PB = 0.007;
     const phone = new THREE.Group();
-    const body = new THREE.Mesh(new RoundedBoxGeometry(0.42, 0.88, 0.04, 6, 0.06), new THREE.MeshPhysicalMaterial({ color: 0x2b2e35, metalness: 0.8, roughness: 0.32, clearcoat: 0.4 }));
-    const glass = new THREE.Mesh(roundedPlane(0.408, 0.868, 0.055), black);
-    glass.position.z = 0.0205;
+    const frameMat = new THREE.MeshPhysicalMaterial({ color: 0x3a3e46, metalness: 1, roughness: 0.28, clearcoat: 0.5, envMapIntensity: 1.1 });
+    const shape = new THREE.Shape();
+    {
+      const w = PW - 2 * PB, hh = PH - 2 * PB, r = PR - PB, x = -w / 2, y = -hh / 2;
+      shape.moveTo(x + r, y);
+      shape.lineTo(x + w - r, y);
+      shape.quadraticCurveTo(x + w, y, x + w, y + r);
+      shape.lineTo(x + w, y + hh - r);
+      shape.quadraticCurveTo(x + w, y + hh, x + w - r, y + hh);
+      shape.lineTo(x + r, y + hh);
+      shape.quadraticCurveTo(x, y + hh, x, y + hh - r);
+      shape.lineTo(x, y + r);
+      shape.quadraticCurveTo(x, y, x + r, y);
+    }
+    const bodyGeo = new THREE.ExtrudeGeometry(shape, { depth: PD - 2 * PB, bevelEnabled: true, bevelThickness: PB, bevelSize: PB, bevelSegments: 4, curveSegments: 24 });
+    bodyGeo.translate(0, 0, -(PD - 2 * PB) / 2);
+    const body = new THREE.Mesh(bodyGeo, frameMat);
+    // old: chetigacha qora shisha, ichida ekran, tepada "orolcha"
+    const glass = new THREE.Mesh(roundedPlane(PW - 0.01, PH - 0.01, PR - 0.005), black);
+    glass.position.z = PD / 2 + 0.0004;
     const phMat = new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false });
-    const phScreen = new THREE.Mesh(roundedPlane(0.388, 0.84, 0.045), phMat);
-    phScreen.position.z = 0.0212;
-    phone.add(body, glass, phScreen);
+    const phScreen = new THREE.Mesh(roundedPlane(PW - 0.032, PH - 0.032, PR - 0.016), phMat);
+    phScreen.position.z = PD / 2 + 0.0008;
+    const island = new THREE.Mesh(roundedPlane(0.1, 0.028, 0.014), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+    island.position.set(0, PH / 2 - 0.042, PD / 2 + 0.0012);
+    const phGlare = new THREE.Mesh(roundedPlane(PW - 0.01, PH - 0.01, PR - 0.005), new THREE.MeshPhysicalMaterial({ transparent: true, opacity: 0.07, roughness: 0.02, clearcoat: 1 }));
+    phGlare.position.z = PD / 2 + 0.0016;
+    phone.add(body, glass, phScreen, island, phGlare);
+
+    // orqa: xira shisha va kamera bloki (telefon aylanganda ko'rinadi)
+    const backGlass = new THREE.Mesh(roundedPlane(PW - 0.01, PH - 0.01, PR - 0.005), new THREE.MeshPhysicalMaterial({ color: 0x2a2d33, roughness: 0.55, clearcoat: 0.3 }));
+    backGlass.rotation.y = Math.PI;
+    backGlass.position.z = -PD / 2 - 0.0004;
+    const bump = new THREE.Mesh(new RoundedBoxGeometry(0.17, 0.17, 0.014, 4, 0.006), frameMat);
+    bump.position.set(PW / 2 - 0.105, PH / 2 - 0.105, -PD / 2 - 0.006);
+    phone.add(backGlass, bump);
+    const ring = new THREE.MeshPhysicalMaterial({ color: 0x55595f, metalness: 1, roughness: 0.25 });
+    const lensMat = new THREE.MeshPhysicalMaterial({ color: 0x06070a, roughness: 0.05, clearcoat: 1 });
+    [[-0.038, 0.038], [-0.038, -0.038], [0.04, 0]].forEach(([dx, dy]) => {
+      const x = bump.position.x - dx, y = bump.position.y + dy;
+      const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.031, 0.012, 32), ring);
+      rim.rotation.x = Math.PI / 2;
+      rim.position.set(x, y, -PD / 2 - 0.018);
+      const lens = new THREE.Mesh(new THREE.CircleGeometry(0.022, 32), lensMat);
+      lens.rotation.y = Math.PI;
+      lens.position.set(x, y, -PD / 2 - 0.0245);
+      phone.add(rim, lens);
+    });
+    const flash = new THREE.Mesh(new THREE.CircleGeometry(0.01, 16), new THREE.MeshBasicMaterial({ color: 0xf2ead8 }));
+    flash.rotation.y = Math.PI;
+    flash.position.set(bump.position.x - 0.04, bump.position.y + 0.05, -PD / 2 - 0.0135);
+    phone.add(flash);
+
+    // yon tugmalar: chapda ovoz (2 ta), o'ngda quvvat
+    const btnGeo = (h) => new RoundedBoxGeometry(0.01, h, 0.016, 2, 0.004);
+    [[-1, 0.2, 0.09], [-1, 0.08, 0.09], [1, 0.14, 0.13]].forEach(([side, y, h]) => {
+      const b = new THREE.Mesh(btnGeo(h), frameMat);
+      b.position.set(side * (PW / 2 + 0.002), y, 0);
+      phone.add(b);
+    });
     const phoneBox = new THREE.Group();
     phoneBox.add(phone);
     phoneBox.position.set(0.82, 0.44, 0.32);
