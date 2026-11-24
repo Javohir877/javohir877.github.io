@@ -68,7 +68,7 @@ export default function App() {
       <main>
         <Works sites={data.sites} bots={data.bots} onOpen={openProject} />
         <Bots bots={data.bots} />
-        <Process phase={editor.phase} html={editor.html} />
+        <Process phase={editor.phase} />
         <GitHub sites={data.sites} />
         <Contact />
       </main>

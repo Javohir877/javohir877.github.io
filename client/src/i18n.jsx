@@ -26,7 +26,8 @@ const DICT = {
     bots: { title: "Botlar", sub: "Telegram va Discord uchun. Botni tanlang — u qanday ishlashini namuna suhbatda ko'rasiz.", sample: "namuna suhbat", you: "Siz", open: "Ochish ↗", invite: "Serverga qo'shish ↗", discord: "Discord bot" },
     process: {
       title: "Sun'iy intellekt bilan ishlayman",
-      sub: "Har loyiha shu to'rt bosqichdan o'tadi. Kod oynasi hozir qaysi bosqichda ekanini ko'rsatib turadi.",
+      sub: "Har loyiha shu to'rt bosqichdan o'tadi.",
+      art: { ask: "OLOV FOOD uchun buyurtma qabul qiladigan server kerak", answer: "Birinchi versiya tayyor: worker.js", meters: [["Tezlik", 64, 98], ["Telefonga moslik", 70, 100]] },
       steps: [
         ["Yozaman", "G'oyani birga muhokama qilamiz, sun'iy intellekt bilan birinchi ishlaydigan versiyani tez yozaman."],
         ["Tahrirlayman", "Har qatorini o'qib chiqaman: xatolar, xavfsizlik, ortiqcha kod — hammasini to'g'irlayman."],
@@ -92,7 +93,8 @@ const DICT = {
     bots: { title: "Боты", sub: "Для Telegram и Discord. Выберите бота — пример диалога покажет, как он работает.", sample: "пример диалога", you: "Вы", open: "Открыть ↗", invite: "Добавить на сервер ↗", discord: "Discord-бот" },
     process: {
       title: "Работаю с искусственным интеллектом",
-      sub: "Каждый проект проходит эти четыре этапа. Окно с кодом показывает, на каком этапе он сейчас.",
+      sub: "Каждый проект проходит эти четыре этапа.",
+      art: { ask: "Нужен сервер, который принимает заказы OLOV FOOD", answer: "Первая версия готова: worker.js", meters: [["Скорость", 64, 98], ["Адаптация под телефон", 70, 100]] },
       steps: [
         ["Пишу", "Обсуждаем идею, и вместе с ИИ я быстро пишу первую рабочую версию."],
         ["Правлю", "Читаю каждую строку: ошибки, безопасность, лишний код — всё исправляю."],
@@ -158,7 +160,8 @@ const DICT = {
     bots: { title: "Bots", sub: "For Telegram and Discord. Pick a bot to see how it works in a sample chat.", sample: "sample chat", you: "You", open: "Open ↗", invite: "Add to server ↗", discord: "Discord bot" },
     process: {
       title: "I work with AI",
-      sub: "Every project goes through these four steps. The code window shows which one it is in right now.",
+      sub: "Every project goes through these four steps.",
+      art: { ask: "I need a server that takes OLOV FOOD orders", answer: "First version is ready: worker.js", meters: [["Speed", 64, 98], ["Mobile fit", 70, 100]] },
       steps: [
         ["Write", "We talk the idea through, then I write the first working version quickly with AI."],
         ["Edit", "I read every line: bugs, security, dead code — all of it gets fixed."],
