@@ -89,6 +89,7 @@ export default function ProjectModal({ sites, index, onClose, onNav }) {
             <p className="pm-links">
               <a className="btn" href={site.url} target="_blank" rel="noopener"><Lbl s={t.works.open} /></a>
               {site.exe && <a className="link" href={site.exe} rel="noopener"><Lbl s={t.works.exe} icon="windows" /></a>}
+              {site.linux && <a className="link" href={site.linux} rel="noopener"><Lbl s={t.works.linux} icon="linux" /></a>}
               {site.apk && <a className="link" href={site.apk} rel="noopener"><Lbl s={t.works.apk} icon="android" /></a>}
               {site.repo && <a className="link" href={site.repo} target="_blank" rel="noopener"><Lbl s={t.works.code} icon="github" /></a>}
             </p>

@@ -1,7 +1,7 @@
 // Ikonkalar: matndagi ↗ → ↓ kabi belgilar o'rniga bir xil chiziqli ikonkalar (Lucide, ISC litsenziya)
 // va platformalarning rasmiy logotiplari (Simple Icons, CC0).
 import { ArrowUpRight, ArrowRight, ArrowLeft, ArrowUp, Download, X, Search, Languages, LayoutGrid, Hash } from "lucide-react";
-import { siTelegram, siDiscord, siGithub, siAndroid } from "simple-icons";
+import { siTelegram, siDiscord, siGithub, siAndroid, siLinux } from "simple-icons";
 
 const LUCIDE = {
   out: ArrowUpRight,
@@ -16,7 +16,7 @@ const LUCIDE = {
   section: Hash,
 };
 
-const BRAND = { telegram: siTelegram, discord: siDiscord, github: siGithub, android: siAndroid };
+const BRAND = { telegram: siTelegram, discord: siDiscord, github: siGithub, android: siAndroid, linux: siLinux };
 
 export default function Icon({ name, size = 16, className = "" }) {
   const cls = "ic " + className;

@@ -89,7 +89,7 @@ function Count({ to }) {
 // 3D sahna og'ir — faqat bo'limga yaqinlashganda yuklanadi
 const DevicesScene = lazy(() => import("./DevicesScene.jsx"));
 
-const PLATFORM_ICON = { web: null, android: "android", windows: "windows" };
+const PLATFORM_ICON = { web: null, android: "android", windows: "windows", linux: "linux" };
 
 export default function Works({ sites, bots = [], onOpen }) {
   const { t, pick } = useLang();
