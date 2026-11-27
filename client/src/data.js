@@ -190,6 +190,25 @@ const BOTS = [
     ],
   },
   {
+    user: "sparfentusmakerbot",
+    platform: "telegram",
+    url: "https://t.me/sparfentusmakerbot",
+    name: "SparFentus Maker",
+    img: "/img/bot-sparfentusmakerbot.jpg",
+    text: {
+      uz: "Kanal egalari uchun: istalgan mavzuda 20 xil uslubda tayyor post va YouTube uchun CTR baland nomlar. Gemini AI bilan.",
+      ru: "Для владельцев каналов: готовый пост на любую тему в 20 стилях и цепляющие названия для YouTube. На Gemini AI.",
+      en: "For channel owners: a ready post on any topic in 20 styles, plus high-CTR YouTube titles. Powered by Gemini AI.",
+    },
+    // namuna suhbat (saytda «namuna» deb belgilanadi)
+    demo: [
+      { from: "me", text: { uz: "Yangi kolleksiya keldi, 20% chegirma, 25-sentyabrgacha", ru: "Новая коллекция, скидка 20% до 25 сентября", en: "New collection is in, 20% off until Sept 25" } },
+      { from: "bot", text: { uz: "Qaysi uslubda yozay?", ru: "В каком стиле написать?", en: "Which style should I use?" }, buttons: [{ uz: "Sotuv / reklama", ru: "Продажи / реклама", en: "Sales / ad" }, { uz: "Hikoya", ru: "История", en: "Story" }, { uz: "Tasodifiy uslub", ru: "Случайный стиль", en: "Random style" }] },
+      { from: "me", text: { uz: "Sotuv / reklama", ru: "Продажи / реклама", en: "Sales / ad" } },
+      { from: "bot", text: { uz: "Yangi kolleksiya — 20% arzon! Faqat 25-sentyabrgacha. Ulgurib qoling — eng chiroylilari birinchi kunlardayoq tugaydi. #chegirma #yangikolleksiya", ru: "Новая коллекция — минус 20%! Только до 25 сентября. Успейте — лучшее разбирают в первые дни. #скидка #новаяколлекция", en: "New collection, 20% off! Only until Sept 25. Hurry: the best pieces go in the first days. #sale #newcollection" }, buttons: [{ uz: "Qayta yozish", ru: "Переписать", en: "Rewrite" }, { uz: "Boshqa uslub", ru: "Другой стиль", en: "Another style" }] },
+    ],
+  },
+  {
     user: "dzteambot",
     platform: "telegram",
     url: "https://t.me/dzteambot",
